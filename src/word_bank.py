@@ -1,46 +1,58 @@
 """
 Words and Clues!
 """
-CURRENT_PACK_ID = 8
-CURRENT_PACK_THEME = "The 2018 Winter Games"
+CURRENT_PACK_ID = 9
+CURRENT_PACK_THEME = "Interviewing for a job"
 CURRENT_PACK = [
     {
-        "code_word": "skiing",
-        "clues": ["cross country", "part of biathlon", "alpine",
-                  "downhill", "nordic combined"],
-        "pack_clue": "The Winter Games",
-        "pack_id": 8
+        "code_word": "résumé",
+        "clues": ["a list of work experience",
+                  "sometimes accompanies a cover letter",
+                  "interviewers look at this when talking to you",
+                  "you always submit one of these for a new job",
+                  "usually two pages or more"],
+        "pack_clue": "Interviewing for a job",
+        "pack_id": 9
     },
     {
-        "code_word": "skating",
-        "clues": ["figure", "speed", "moving on ice or concrete",
-                  "in-line", "roller"],
-        "pack_clue": "The Winter Games",
-        "pack_id": 8
+        "code_word": "manager",
+        "clues": ["has direct reports",
+                  "responsible for hiring new employees",
+                  "leader of a group of people",
+                  "helps control the flow of work on a team",
+                  "sets team strategy"],
+        "pack_clue": "Interviewing for a job",
+        "pack_id": 9
     },
     {
-        "code_word": "medal",
-        "clues": ["gold, silver, bronze", "award for being in the top 3",
-                  "first given in the 1904 olympics",
-                  "countries count them during the olympics", "circular with a ribbon attached"],
-        "pack_clue": "The Winter Games",
-        "pack_id": 8
+        "code_word": "recruiter",
+        "clues": ["helps you find a job",
+                  "first point of contact after applying for a job",
+                  "identifies and screens job candidates",
+                  "interviews people for open jobs",
+                  "looks for people who can do a job"],
+        "pack_clue": "Interviewing for a job",
+        "pack_id": 9
     },
     {
-        "code_word": "curling",
-        "clues": ["sliding stones", "four concentric circles", "chess on ice",
-                  "polished granite stones", "invented by the Scottish"],
-        "pack_clue": "The Winter Games",
-        "pack_id": 8
+        "code_word": "compensation",
+        "clues": ["money plus other benefits",
+                  "what you get in return for doing your job",
+                  "another word for payment",
+                  "the reward for working",
+                  "what you negotiate on after a job offer"],
+        "pack_clue": "Interviewing for a job",
+        "pack_id": 9
     },
     {
-        "code_word": "Korea",
-        "clues": ["two sovereign states: North and South", "location of a war from 1950 to 1953",
-                  "North bordered by Russia and China",
-                  "South state is hosting the 2018 winter olympics",
-                  "Yellow Sea to the west, Sea of Japan to the east"],
-        "pack_clue": "The Winter Games",
-        "pack_id": 8
+        "code_word": "work",
+        "clues": ["job",
+                  "office",
+                  "co-workers",
+                  "colleagues",
+                  "you go here to make money"],
+        "pack_clue": "Interviewing for a job",
+        "pack_id": 9
     }
 ]
 
@@ -529,5 +541,43 @@ QUESTIONS = [
                   "area of a baseball field"],
         "pack_clue": "Will you marry me?",
         "pack_id": 7
+    },
+    {
+        "code_word": "skiing",
+        "clues": ["cross country", "part of the biathlon olympic event", "alpine",
+                  "downhill", "nordic combined"],
+        "pack_clue": "The Winter Games",
+        "pack_id": 8
+    },
+    {
+        "code_word": "skating",
+        "clues": ["figure", "speed", "you can do it on ice or concrete",
+                  "in-line", "roller"],
+        "pack_clue": "The Winter Games",
+        "pack_id": 8
+    },
+    {
+        "code_word": "medal",
+        "clues": ["gold, silver, bronze", "award for being in the top 3",
+                  "first given in the 1904 olympics",
+                  "countries count them during the olympics", "circular with a ribbon attached"],
+        "pack_clue": "The Winter Games",
+        "pack_id": 8
+    },
+    {
+        "code_word": "curling",
+        "clues": ["sliding stones", "four concentric circles", "sometimes calleed chess on ice",
+                  "polished granite stones", "invented by the Scottish"],
+        "pack_clue": "The Winter Games",
+        "pack_id": 8
+    },
+    {
+        "code_word": "Korea",
+        "clues": ["two sovereign states: North and South", "location of a war from 1950 to 1953",
+                  "North bordered by Russia and China",
+                  "This country hosted the 2018 winter olympics",
+                  "Yellow Sea to the west, Sea of Japan to the east"],
+        "pack_clue": "The Winter Games",
+        "pack_id": 8
     }
 ]
