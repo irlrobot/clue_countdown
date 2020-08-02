@@ -1,0 +1,953 @@
+{
+  "interactionModel": {
+      "languageModel": {
+          "invocationName": "code word",
+          "intents": [
+              {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": [
+                      "rules",
+                      "game rules",
+                      "what are the rules",
+                      "tell me the rules",
+                      "tell us the rules"
+                  ]
+              },
+              {
+                  "name": "AMAZON.NoIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.StartOverIntent",
+                  "samples": [
+                      "new game",
+                      "start new game",
+                      "play again",
+                      "yes play again",
+                      "play game again",
+                      "play the game again",
+                      "i want to play again",
+                      "we want to play again"
+                  ]
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.YesIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AnswerIntent",
+                  "slots": [
+                      {
+                          "name": "CatchAllAnswer",
+                          "type": "ANSWER_LIST"
+                      }
+                  ],
+                  "samples": [
+                      "{CatchAllAnswer}"
+                  ]
+              },
+              {
+                  "name": "NextClueIntent",
+                  "slots": [],
+                  "samples": [
+                      "next clue",
+                      "next please",
+                      "next clue please",
+                      "another clue",
+                      "another clue please",
+                      "i need a clue",
+                      "we need a clue",
+                      "i need another clue",
+                      "i need another clue please",
+                      "we need another clue",
+                      "we need another clue please",
+                      "give me a clue",
+                      "give us a clue",
+                      "clue",
+                      "clue please",
+                      "next",
+                      "pass"
+                  ]
+              },
+              {
+                  "name": "NotSureIntent",
+                  "slots": [],
+                  "samples": [
+                      "don't know",
+                      "i'm not sure",
+                      "i don't know",
+                      "not sure",
+                      "no clue",
+                      "no idea",
+                      "i have no idea"
+                  ]
+              },
+              {
+                  "name": "RepeatIntent",
+                  "slots": [],
+                  "samples": [
+                      "repeat",
+                      "repeat please",
+                      "repeat the last clue",
+                      "can you repeat",
+                      "can you repeat that",
+                      "can you repeat the clue",
+                      "what did she say",
+                      "what was the clue",
+                      "i didn't hear the clue",
+                      "say again",
+                      "can you say that again",
+                      "what was that",
+                      "what",
+                      "i can't hear you",
+                      "i didn't hear you",
+                      "what did you say"
+                  ]
+              }
+          ],
+          "types": [
+              {
+                  "name": "ANSWER_LIST",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "trump",
+                              "synonyms": [
+                                  "donald trump"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "mountain",
+                              "synonyms": [
+                                  "mountains"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "simpson",
+                              "synonyms": [
+                                  "simpsons",
+                                  "the simpsons"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "brunch"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "allowance"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "dog"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "club"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "watch",
+                              "synonyms": [
+                                  "a watch",
+                                  "wrist watch",
+                                  "pocket watch"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "swift",
+                              "synonyms": [
+                                  "swiftly"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "black"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "chill"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "base"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "pupil"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "space"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "sky"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "walk"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "love"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "pitcher"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "traffic"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "covfefe",
+                              "synonyms": [
+                                  "cov fefe",
+                                  "coffee",
+                                  "call fefe",
+                                  "call fifi",
+                                  "cove fefe",
+                                  "cove fifi"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "caroling",
+                              "synonyms": [
+                                  "christmas caroling"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "alexa"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "wine",
+                              "synonyms": [
+                                  "vino"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "oprah",
+                              "synonyms": [
+                                  "oprah winfrey"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "kardashian",
+                              "synonyms": [
+                                  "kardashians"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "beyonce",
+                              "synonyms": [
+                                  "queen bee"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "eleven",
+                              "synonyms": [
+                                  "11"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "pharrell"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "hamilton",
+                              "synonyms": [
+                                  "alexander hamilton"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "dragon",
+                              "synonyms": [
+                                  "dragons"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "tinder",
+                              "synonyms": [
+                                  "tinder app"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "cram",
+                              "synonyms": [
+                                  "cramming"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "cook",
+                              "synonyms": [
+                                  "cooking"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "awkward"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "easter"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "halloween",
+                              "synonyms": [
+                                  "hall-o-ween"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "goals"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "vibes"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "amazon",
+                              "synonyms": [
+                                  "amazon dot com",
+                                  "amazon.com"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "friends"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "cheers"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "booty",
+                              "synonyms": [
+                                  "bootie"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "game",
+                              "synonyms": [
+                                  "board game",
+                                  "games"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "tip",
+                              "synonyms": [
+                                  "tips",
+                                  "tipping"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "spouse",
+                              "synonyms": [
+                                  "spouses"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "pickle",
+                              "synonyms": [
+                                  "pickle rick"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "speedo",
+                              "synonyms": [
+                                  "speedo company",
+                                  "speedo swimsuit",
+                                  "a speedo"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "titanic",
+                              "synonyms": [
+                                  "the titanic"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "nile",
+                              "synonyms": [
+                                  "nile river",
+                                  "the nile river"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "sweaty",
+                              "synonyms": [
+                                  "sweat",
+                                  "sweating"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "cruise",
+                              "synonyms": [
+                                  "cruise ship"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "hail"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "manhattan"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "prince"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "dice",
+                              "synonyms": [
+                                  "die"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "nerd",
+                              "synonyms": [
+                                  "nerdy",
+                                  "nerds"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "blush",
+                              "synonyms": [
+                                  "blushing"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "wax",
+                              "synonyms": [
+                                  "waxing"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "europe",
+                              "synonyms": [
+                                  "european"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "florida"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "maps",
+                              "synonyms": [
+                                  "map"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "explorers",
+                              "synonyms": [
+                                  "explorer"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "bud",
+                              "synonyms": [
+                                  "buds",
+                                  "budding"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "break",
+                              "synonyms": [
+                                  "breaks",
+                                  "breaking"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "shower",
+                              "synonyms": [
+                                  "showers"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "boil",
+                              "synonyms": [
+                                  "boilng"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "tank",
+                              "synonyms": [
+                                  "tanks",
+                                  "tank top"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "ocean",
+                              "synonyms": [
+                                  "oceans"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "float",
+                              "synonyms": [
+                                  "floating",
+                                  "floats"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "rule",
+                              "synonyms": [
+                                  "ruler"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "war",
+                              "synonyms": [
+                                  "wars"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "truck",
+                              "synonyms": [
+                                  "food truck",
+                                  "trucks"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "potato",
+                              "synonyms": [
+                                  "potatoes"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "appetizer",
+                              "synonyms": [
+                                  "appetizers"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "dessert",
+                              "synonyms": [
+                                  "desserts"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "chef"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "tree",
+                              "synonyms": [
+                                  "trees",
+                                  "christmas tree"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "claus",
+                              "synonyms": [
+                                  "claws",
+                                  "clause",
+                                  "santa claus"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "mince",
+                              "synonyms": [
+                                  "minced",
+                                  "mincemeat",
+                                  "mince meat",
+                                  "minced meat",
+                                  "mincemeat pie",
+                                  "minced meat pie"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "present",
+                              "synonyms": [
+                                  "presents"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "elf",
+                              "synonyms": [
+                                  "elves"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "resolution",
+                              "synonyms": [
+                                  "resolutions"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "champagne"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "countdown",
+                              "synonyms": [
+                                  "countdowns",
+                                  "count down"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "midnight"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "fireworks",
+                              "synonyms": [
+                                  "firework"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "goosebumps",
+                              "synonyms": [
+                                  "goose bumps"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "tamagotchi"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "posh",
+                              "synonyms": [
+                                  "posh spice"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "diana",
+                              "synonyms": [
+                                  "princess diana",
+                                  "lady di",
+                                  "lady die"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "beanie",
+                              "synonyms": [
+                                  "beanie babies"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "skiing",
+                              "synonyms": [
+                                  "ski"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "skating",
+                              "synonyms": [
+                                  "skate"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "medal",
+                              "synonyms": [
+                                  "medals"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "curling"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "korea",
+                              "synonyms": [
+                                  "Korea",
+                                  "South Korea",
+                                  "North Korea"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "ring",
+                              "synonyms": [
+                                  "rings"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "bouquet"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "vow",
+                              "synonyms": [
+                                  "vows"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "diamond",
+                              "synonyms": [
+                                  "diamonds",
+                                  "diamond ring"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "propose",
+                              "synonyms": [
+                                  "proposal"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "hulk",
+                              "synonyms": [
+                                  "incredible hulk",
+                                  "th hulk"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "daredevil"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "batman",
+                              "synonyms": [
+                                  "bat man"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "avengers",
+                              "synonyms": [
+                                  "avenger",
+                                  "the avengers"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "superman",
+                              "synonyms": [
+                                  "super man"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "flash",
+                              "synonyms": [
+                                  "the flash"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "wolverine",
+                              "synonyms": [
+                                  "wolverines"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "marvel"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "wonder",
+                              "synonyms": [
+                                  "wonder woman"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "storm"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "comic",
+                              "synonyms": [
+                                  "comic book"
+                              ]
+                          }
+                      }
+                  ]
+              }
+          ]
+      }
+  }
+}
