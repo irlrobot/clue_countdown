@@ -1,6 +1,9 @@
 """
 Strings
 """
+import random
+
+
 WELCOME_BACK_MESSAGE_1 = """
 <amazon:emotion name="excited" intensity="medium">
 Hey there, welcome back to Words Plus Clues!
@@ -136,3 +139,36 @@ Thanks for playing Words Plus Clues!
 If you had fun playing, please leave a 5 star review to support the creator."
 </amazon:emotion>
 """
+
+CORRECT_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
+    random_excited_phrase() + " The word was {}.</amazon:emotion>"
+
+WRONG_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
+    "Nope! The word was {}.</amazon:emotion>"
+
+END_GAME_WRAP_UP = """
+<amazon:emotion name="excited" intensity="medium">
+Wow, nice job! You got {} points. Would you like to play Words Plus Clues again?"
+</amazon:emotion>
+"""
+
+NO_MORE_CLUES = """
+<amazon:emotion name="excited" intensity="low">
+I've already given you all the clues!  The last clue was: {}". What word am I thinking of?"
+</amazon:emotion>
+"""
+
+
+def random_excited_phrase():
+    """ Return a random encouraging phrase for getting a right answer """
+    phrases = [
+        "Nailed it!",
+        "Nice one!",
+        "Great work!",
+        "You got it!",
+        "Woohoo nice job!",
+        "You're amazing!",
+        "Crushed it!"
+    ]
+
+    return phrases[random.randint(0, len(phrases) - 1)]

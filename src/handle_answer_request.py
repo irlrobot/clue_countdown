@@ -7,7 +7,8 @@ from fuzzywuzzy import fuzz
 from alexa_responses import speech_with_card, speech
 from manage_data import update_score_and_games, update_score_games_and_pack
 from strings import (
-    WRONG_ANSWER_CLUES_REMAIN, NEXT_CLUE
+    WRONG_ANSWER_CLUES_REMAIN, NEXT_CLUE, CORRECT_ANSWER, WRONG_ANSWER,
+    END_GAME_WRAP_UP, NO_MORE_CLUES
 )
 from word_bank import CURRENT_PACK_ID
 
@@ -55,7 +56,7 @@ def handle_answer_request(intent, session):
         return end_game_return_score(current_score, player_info, answered_correctly,
                                      answer, correct_answer, play_newest_word_pack)
 
-    # If that wasn't the last word continue on to next round.
+    # If that wasn't the last word in the game continue on to next word.
     current_question_index += 1
     speech_output = "Get ready.  Next round in 3... 2... 1... " +\
         questions[current_question_index]['clues'][0]
@@ -72,14 +73,14 @@ def handle_answer_request(intent, session):
     }
 
     if answered_correctly:
-        speech_output = "Nailed it.  The word was " + str(correct_answer) + \
-            ". " + speech_output
+        speech_output = CORRECT_ANSWER.format(
+            str(correct_answer)) + speech_output
         card_text = "The word was:  " + correct_answer + ". You got " + \
             str(current_question_value) + " points!"
         card_title = "You figured out the word!"
     else:
-        speech_output = "Nope!  The word was " + str(correct_answer) + \
-            ". " + speech_output
+        speech_output = WRONG_ANSWER.format(
+            str(correct_answer)) + speech_output
         card_text = "The word was:  " + correct_answer + "\n" + \
             "You said:  " + str(answer)
         card_title = "That wasn't the word!"
@@ -96,17 +97,16 @@ def end_game_return_score(current_score, player_info, answered_correctly,
                           answer, correct_answer, play_newest_word_pack):
     """ If the customer answered the last question end the game """
     logger.debug("=====end_game_return_score fired...")
-    wrap_up = "Wow, nice job! You got  " + \
-        str(current_score) + " points. Would you like to play Words Plus Clues again?"
+    wrap_up = END_GAME_WRAP_UP.format(str(current_score))
 
     if answered_correctly:
-        speech_output = "Nailed it. The word was " + str(correct_answer) + \
-            ". " + wrap_up
+        speech_output = CORRECT_ANSWER.format(
+            str(correct_answer)) + wrap_up
         card_text = "Your score is " + str(current_score) + " points!\n" + \
             "The last word was: " + correct_answer
     else:
-        speech_output = "Nope! The word was " + str(correct_answer) + \
-            ". " + wrap_up
+        speech_output = WRONG_ANSWER.format(
+            str(correct_answer)) + wrap_up
         card_text = "Your score is " + str(current_score) + " points!\n" + \
             "\nThe last word was: " + correct_answer + "\nYou said: " + answer
 
@@ -148,8 +148,8 @@ def end_game_return_score(current_score, player_info, answered_correctly,
 
 
 def next_clue_request(session=None, was_wrong_answer=None):
-    """give player the next clue"""
-    print("=====next_clue_request fired...")
+    """ Give player the next clue """
+    logger.debug("=====next_clue_request fired...")
     attributes = {}
     game_questions = session['attributes']['questions']
     game_length = session['attributes']['game_length']
@@ -169,8 +169,7 @@ def next_clue_request(session=None, was_wrong_answer=None):
             speech_output = WRONG_ANSWER_CLUES_REMAIN + next_clue
     else:
         next_clue = current_clue
-        speech_output = "I've already given you all the clues!  The last clue was:  " + \
-            current_clue + ". What word am I thinking of?"
+        speech_output = NO_MORE_CLUES.format(current_clue)
 
     attributes = {
         "current_question_index": current_question_index,
