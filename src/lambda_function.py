@@ -16,7 +16,8 @@ from strings import (
     HELP_MESSAGE_DURING_GAME, HELP_MESSAGE_BEFORE_GAME, FIRST_GAME_MESSAGE,
     WELCOME_REPROMPT, WELCOME_BACK_MESSAGE_1, WELCOME_BACK_MESSAGE_2,
     WELCOME_BACK_MESSAGE_PERSONALIZED_1, WELCOME_BACK_MESSAGE_PERSONALIZED_2,
-    WELCOME_BACK_MESSAGE_OPPONENT_1, WELCOME_BACK_MESSAGE_OPPONENT_2
+    WELCOME_BACK_MESSAGE_OPPONENT_1, WELCOME_BACK_MESSAGE_OPPONENT_2,
+    FIRST_GAME_MESSAGE_PERSONALIZED
 )
 
 
@@ -119,7 +120,12 @@ def launch_request(user_id, person_id):
                                                                  player['lastScore']['N'])
     # Otherwise it looks like a new customer and they get a welcome experience.
     else:
-        tts = FIRST_GAME_MESSAGE
+        # If no voice profile detected give the non-personalized experience.
+        if person_id == "default":
+            tts = FIRST_GAME_MESSAGE
+        # Otherwise we personalize the greeting.
+        else:
+            tts = FIRST_GAME_MESSAGE_PERSONALIZED
 
     # Prepping session attributes to be used during gameplay.
     attributes = {
