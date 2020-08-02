@@ -125,7 +125,7 @@ def launch_request(user_id, person_id):
             tts = FIRST_GAME_MESSAGE
         # Otherwise we personalize the greeting.
         else:
-            tts = FIRST_GAME_MESSAGE_PERSONALIZED
+            tts = FIRST_GAME_MESSAGE_PERSONALIZED.format(person_id)
 
     # Prepping session attributes to be used during gameplay.
     attributes = {
