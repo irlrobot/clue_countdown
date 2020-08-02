@@ -105,6 +105,11 @@ FIRST_GAME_MESSAGE = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
     HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
 
+FIRST_GAME_MESSAGE_PERSONALIZED = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
+    "Thanks for playing Words with Clues <alexa:name type=\"first\" personId=\"{}\"/>!" +\
+    "</amazon:emotion> " + HELP_MESSAGE + \
+    " Do you need to hear the rules again before we get started?"
+
 NEXT_CLUE = """
 <amazon:emotion name="excited" intensity="low">
 The next clue is...
