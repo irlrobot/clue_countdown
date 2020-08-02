@@ -97,7 +97,7 @@ def end_game_return_score(current_score, player_info, answered_correctly,
     """ If the customer answered the last question end the game """
     logger.debug("=====end_game_return_score fired...")
     wrap_up = "Wow, nice job! You got  " + \
-        str(current_score) + " points. Would you like to play Words with Clues again?"
+        str(current_score) + " points. Would you like to play Words Plus Clues again?"
 
     if answered_correctly:
         speech_output = "Nailed it. The word was " + str(correct_answer) + \
@@ -142,7 +142,7 @@ def end_game_return_score(current_score, player_info, answered_correctly,
             customer_id, new_lifetime_score, new_games_played, current_score)
 
     card_title = "Game Results"
-    reprompt = "Would you like to play Words with Clues again?"
+    reprompt = "Would you like to play Words Plus Clues again?"
     return speech_with_card(speech_output, attributes, should_end_session,
                             card_title, card_text, answered_correctly, reprompt)
 

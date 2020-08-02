@@ -302,7 +302,7 @@ def test_play_end_message_with_rating(mocker):
             'shouldEndSession': True,
             'outputSpeech': {
                 'type': 'SSML',
-                'ssml': '<speak>Thanks for playing Words with Clues!</speak>'
+                'ssml': '<speak>Thanks for playing Words Plus Clues!</speak>'
             },
             'reprompt': {
                 'outputSpeech': {
