@@ -23,3 +23,4 @@
 [] Remove the sound prompt, it just causes delay
 [] Finding an opponent now happens before we even determine whether or not they are valid TODO 1
 [] Install python-Levenshtein in Lambda, problem building with alppb
+[] Record an intro message for first time/new players using my voice
