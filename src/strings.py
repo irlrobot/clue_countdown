@@ -121,7 +121,7 @@ The next clue is...
 </amazon:emotion>
 """
 
-WRONG_ANSWER_CLUES_REMAIN = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
+WRONG_ANSWER_CLUES_REMAIN = "<amazon:emotion name=\"excited\" intensity=\"medium\">" +\
     "Good guess, but that's not the word!</amazon:emotion> " + \
     NEXT_CLUE
 
@@ -140,9 +140,6 @@ If you had fun playing, please leave a 5 star review to support the creator."
 </amazon:emotion>
 """
 
-CORRECT_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
-    random_excited_phrase() + " The word was {}.</amazon:emotion>"
-
 WRONG_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
     "Nope! The word was {}.</amazon:emotion>"
 
@@ -159,7 +156,7 @@ I've already given you all the clues!  The last clue was: {}". What word am I th
 """
 
 
-def random_excited_phrase():
+def random_correct_answer_message(correct_answer):
     """ Return a random encouraging phrase for getting a right answer """
     phrases = [
         "Nailed it!",
@@ -171,4 +168,12 @@ def random_excited_phrase():
         "Crushed it!"
     ]
 
-    return phrases[random.randint(0, len(phrases) - 1)]
+    phrase = phrases[random.randint(0, len(phrases) - 1)]
+    return """
+    <amazon:emotion name="excited" intensity="high">
+    {} 
+    </amazon:emotion>
+    <amazon:emotion name="excited" intensity="low">
+    The word was {}.
+    </amazon:emotion>
+    """.format(phrase, correct_answer)
