@@ -1,5 +1,5 @@
 """
-Manage all the data for Code Word
+Manage all the data in DynamoDB
 """
 from __future__ import print_function
 import datetime

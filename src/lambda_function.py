@@ -1,5 +1,5 @@
 """
-Code Word AWS Lambda Entrypoint
+AWS Lambda Entrypoint
 """
 from __future__ import print_function
 import json

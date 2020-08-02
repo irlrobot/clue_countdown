@@ -1,5 +1,5 @@
 """
-Start a new game of Code Word
+Start a new game
 """
 from __future__ import print_function
 import logging

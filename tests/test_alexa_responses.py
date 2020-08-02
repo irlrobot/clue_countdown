@@ -6,6 +6,8 @@ from src.alexa_responses import (
 ###########################################
 # speech()
 ###########################################
+
+
 def test_speech_no_reprompt_answered_correctly_end_session():
     tts = 'blah'
     attributes = {}
@@ -29,8 +31,9 @@ def test_speech_no_reprompt_answered_correctly_end_session():
         }
     }
 
-    assert speech(tts, attributes, should_end_session, 
+    assert speech(tts, attributes, should_end_session,
                   answered_correctly) == expected
+
 
 def test_speech_reprompt_answered_correctly_end_session():
     tts = 'blah'
@@ -56,8 +59,9 @@ def test_speech_reprompt_answered_correctly_end_session():
         }
     }
 
-    assert speech(tts, attributes, should_end_session, 
+    assert speech(tts, attributes, should_end_session,
                   answered_correctly, reprompt) == expected
+
 
 def test_speech_no_reprompt_answered_correctly_dont_end_session():
     tts = 'blah'
@@ -82,8 +86,9 @@ def test_speech_no_reprompt_answered_correctly_dont_end_session():
         }
     }
 
-    assert speech(tts, attributes, should_end_session, 
+    assert speech(tts, attributes, should_end_session,
                   answered_correctly) == expected
+
 
 def test_speech_reprompt_answered_correctly_dont_end_session():
     tts = 'blah'
@@ -109,12 +114,14 @@ def test_speech_reprompt_answered_correctly_dont_end_session():
         }
     }
 
-    assert speech(tts, attributes, should_end_session, 
+    assert speech(tts, attributes, should_end_session,
                   answered_correctly, reprompt) == expected
 
 ###########################################
 # speech_with_card()
 ###########################################
+
+
 def test_speech_with_card_no_reprompt_answered_correctly_end_session():
     tts = 'blah'
     attributes = {}
@@ -151,9 +158,10 @@ def test_speech_with_card_no_reprompt_answered_correctly_end_session():
         }
     }
 
-    assert speech_with_card(tts, attributes, should_end_session, 
+    assert speech_with_card(tts, attributes, should_end_session,
                             card_title, card_text,
                             answered_correctly) == expected
+
 
 def test_speech_with_card_reprompt_answered_correctly_end_session():
     tts = 'blah'
@@ -192,9 +200,10 @@ def test_speech_with_card_reprompt_answered_correctly_end_session():
         }
     }
 
-    assert speech_with_card(tts, attributes, should_end_session, 
+    assert speech_with_card(tts, attributes, should_end_session,
                             card_title, card_text,
                             answered_correctly, reprompt) == expected
+
 
 def test_speech_with_card_no_reprompt_answered_correctly_dont_end_session():
     tts = 'blah'
@@ -232,9 +241,10 @@ def test_speech_with_card_no_reprompt_answered_correctly_dont_end_session():
         }
     }
 
-    assert speech_with_card(tts, attributes, should_end_session, 
+    assert speech_with_card(tts, attributes, should_end_session,
                             card_title, card_text,
                             answered_correctly) == expected
+
 
 def test_speech_with_card_reprompt_answered_correctly_dont_end_session():
     tts = 'blah'
@@ -273,13 +283,15 @@ def test_speech_with_card_reprompt_answered_correctly_dont_end_session():
         }
     }
 
-    assert speech_with_card(tts, attributes, should_end_session, 
+    assert speech_with_card(tts, attributes, should_end_session,
                             card_title, card_text,
                             answered_correctly, reprompt) == expected
 
 ###########################################
 # play_end_message()
 ###########################################
+
+
 def test_play_end_message_with_rating(mocker):
     # mock randint to always return 1
     mocker.patch('random.randint', return_value=1)
@@ -290,7 +302,7 @@ def test_play_end_message_with_rating(mocker):
             'shouldEndSession': True,
             'outputSpeech': {
                 'type': 'SSML',
-                'ssml': '<speak>Thanks for playing Code Word!</speak>'
+                'ssml': '<speak>Thanks for playing Words with Clues!</speak>'
             },
             'reprompt': {
                 'outputSpeech': {

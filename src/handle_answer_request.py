@@ -46,7 +46,7 @@ def handle_answer_request(intent, session):
         if current_clue_index != 4:
             return next_clue_request(session=session, was_wrong_answer=True)
 
-    # If that was the last code word end the game.
+    # If that was the last word end the game.
     if current_question_index == game_length - 1:
         if play_newest_word_pack:
             player_info['lastWordPackPlayed']['N'] = CURRENT_PACK_ID
@@ -55,7 +55,7 @@ def handle_answer_request(intent, session):
         return end_game_return_score(current_score, player_info, answered_correctly,
                                      answer, correct_answer, play_newest_word_pack)
 
-    # if that wasn't the last code word continue on to next round
+    # If that wasn't the last word continue on to next round.
     current_question_index += 1
     speech_output = "Get ready.  Next round in 3... 2... 1... " +\
         questions[current_question_index]['clues'][0]
@@ -72,17 +72,17 @@ def handle_answer_request(intent, session):
     }
 
     if answered_correctly:
-        speech_output = "Nailed it.  The code word was " + str(correct_answer) + \
+        speech_output = "Nailed it.  The word was " + str(correct_answer) + \
             ". " + speech_output
-        card_text = "The code word was:  " + correct_answer + ". You got " + \
+        card_text = "The word was:  " + correct_answer + ". You got " + \
             str(current_question_value) + " points!"
-        card_title = "You figured out the Code Word!"
+        card_title = "You figured out the word!"
     else:
-        speech_output = "Nope!  The code word was " + str(correct_answer) + \
+        speech_output = "Nope!  The word was " + str(correct_answer) + \
             ". " + speech_output
-        card_text = "The code word was:  " + correct_answer + "\n" + \
+        card_text = "The word was:  " + correct_answer + "\n" + \
             "You said:  " + str(answer)
-        card_title = "You didn't figure out the Code Word!"
+        card_title = "That wasn't the word!"
 
     return speech_with_card(tts=speech_output,
                             attributes=attributes,
@@ -94,21 +94,21 @@ def handle_answer_request(intent, session):
 
 def end_game_return_score(current_score, player_info, answered_correctly,
                           answer, correct_answer, play_newest_word_pack):
-    """if the customer answered the last question end the game"""
-    print("=====end_game_return_score fired...")
+    """ If the customer answered the last question end the game """
+    logger.debug("=====end_game_return_score fired...")
     wrap_up = "Wow, nice job! You got  " + \
-        str(current_score) + " points.  Would you like to play Code Word again?"
+        str(current_score) + " points. Would you like to play Words with Clues again?"
 
     if answered_correctly:
-        speech_output = "Nailed it.  The code word was " + str(correct_answer) + \
+        speech_output = "Nailed it. The word was " + str(correct_answer) + \
             ". " + wrap_up
         card_text = "Your score is " + str(current_score) + " points!\n" + \
-            "The last code word was: " + correct_answer
+            "The last word was: " + correct_answer
     else:
-        speech_output = "Nope!  The code word was " + str(correct_answer) + \
+        speech_output = "Nope! The word was " + str(correct_answer) + \
             ". " + wrap_up
         card_text = "Your score is " + str(current_score) + " points!\n" + \
-            "\nThe last code word was: " + correct_answer + "\nYou said: " + answer
+            "\nThe last word was: " + correct_answer + "\nYou said: " + answer
 
     customer_id = player_info['customerID']['S']
     new_lifetime_score = int(current_score) + \
@@ -142,7 +142,7 @@ def end_game_return_score(current_score, player_info, answered_correctly,
             customer_id, new_lifetime_score, new_games_played, current_score)
 
     card_title = "Game Results"
-    reprompt = "Would you like to play Code Word again?"
+    reprompt = "Would you like to play Words with Clues again?"
     return speech_with_card(speech_output, attributes, should_end_session,
                             card_title, card_text, answered_correctly, reprompt)
 
@@ -170,7 +170,7 @@ def next_clue_request(session=None, was_wrong_answer=None):
     else:
         next_clue = current_clue
         speech_output = "I've already given you all the clues!  The last clue was:  " + \
-            current_clue + ". What do you think the Code Word is?"
+            current_clue + ". What word am I thinking of?"
 
     attributes = {
         "current_question_index": current_question_index,

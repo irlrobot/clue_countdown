@@ -1,7 +1,7 @@
 {
   "interactionModel": {
       "languageModel": {
-          "invocationName": "code word",
+          "invocationName": "words with clues",
           "intents": [
               {
                   "name": "AMAZON.CancelIntent",

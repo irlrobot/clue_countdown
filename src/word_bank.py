@@ -1,5 +1,5 @@
 """
-Bank of Code Words
+Words and Clues!
 """
 CURRENT_PACK_ID = 8
 CURRENT_PACK_THEME = "The 2018 Winter Games"
