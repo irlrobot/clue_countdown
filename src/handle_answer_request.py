@@ -7,8 +7,8 @@ from fuzzywuzzy import fuzz
 from alexa_responses import speech_with_card, speech
 from manage_data import update_score_and_games, update_score_games_and_pack
 from strings import (
-    WRONG_ANSWER_CLUES_REMAIN, NEXT_CLUE, CORRECT_ANSWER, WRONG_ANSWER,
-    END_GAME_WRAP_UP, NO_MORE_CLUES
+    WRONG_ANSWER_CLUES_REMAIN, NEXT_CLUE, random_correct_answer_message,
+    WRONG_ANSWER, END_GAME_WRAP_UP, NO_MORE_CLUES
 )
 from word_bank import CURRENT_PACK_ID
 
@@ -73,7 +73,7 @@ def handle_answer_request(intent, session):
     }
 
     if answered_correctly:
-        speech_output = CORRECT_ANSWER.format(
+        speech_output = random_correct_answer_message(
             str(correct_answer)) + speech_output
         card_text = "The word was:  " + correct_answer + ". You got " + \
             str(current_question_value) + " points!"
@@ -100,7 +100,7 @@ def end_game_return_score(current_score, player_info, answered_correctly,
     wrap_up = END_GAME_WRAP_UP.format(str(current_score))
 
     if answered_correctly:
-        speech_output = CORRECT_ANSWER.format(
+        speech_output = random_correct_answer_message(
             str(correct_answer)) + wrap_up
         card_text = "Your score is " + str(current_score) + " points!\n" + \
             "The last word was: " + correct_answer
