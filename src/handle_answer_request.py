@@ -8,19 +8,18 @@ from alexa_responses import speech_with_card, speech
 from manage_data import update_dynamodb
 import strings
 from word_bank import CURRENT_PACK_ID
-from session_attributes import SessionAttributes
 
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-def handle_answer_request(intent, session_attributes):
+def handle_answer_request(intent, this_game):
     """ Check if the answer is right, adjust score, and continue """
     logger.debug("=====handle_answer_request fired...")
-    logger.debug(session_attributes)
+    logger.debug(this_game.attributes)
 
-    this_game = SessionAttributes(session_attributes)
+    this_game.update_game_status("in_progress")
     answer_heard = get_answer_from_(intent)
     current_question_value = 50 - int(this_game.current_clue_index * 10)
     correct_answer = this_game.get_answer_for_current_question()
@@ -38,7 +37,7 @@ def handle_answer_request(intent, session_attributes):
         answered_correctly = False
         # If clues remain give them the next clue instead of moving on.
         if this_game.current_clue_index != 4:
-            return next_clue_request(attributes=this_game, last_guess_was_wrong=True)
+            return next_clue_request(this_game, True)
 
     # If that was the last word and no clues remain, end the game.
     if this_game.current_question_index == this_game.game_length - 1:
@@ -81,6 +80,7 @@ def end_game_return_score(this_game, answered_correctly,
     """ If the customer answered the last question we end the game """
     logger.debug("=====end_game_return_score fired...")
     this_game.increment_total_games_played()
+    this_game.update_game_status("ended")
     update_dynamodb(this_game.get_customer_id(), this_game.player_info)
 
     wrap_up_speech = strings.END_GAME_WRAP_UP.format(
@@ -109,83 +109,46 @@ def end_game_return_score(this_game, answered_correctly,
                             reprompt=reprompt)
 
 
-def next_clue_request(attributes=None, last_guess_was_wrong=None):
+def next_clue_request(this_game, last_guess_was_wrong):
     """ Give player the next clue """
     logger.debug("=====next_clue_request fired...")
-    attributes = {}
-    game_questions = session['attributes']['questions']
-    game_length = session['attributes']['game_length']
-    current_score = session['attributes']['score']
-    current_question_index = session['attributes']['current_question_index']
-    current_clue_index = session['attributes']['current_clue_index']
-    play_newest_word_pack = session['attributes']['play_newest_word_pack']
-    current_clue = game_questions[current_question_index]['clues'][current_clue_index]
-    should_end_session = False
-    max_clues = len(game_questions[current_question_index]['clues']) - 1
 
-    if current_clue_index < max_clues:
-        current_clue_index += 1
-        next_clue = game_questions[current_question_index]['clues'][current_clue_index]
-        speech_output = NEXT_CLUE + next_clue
-        if was_wrong_answer:
-            speech_output = WRONG_ANSWER_CLUES_REMAIN + next_clue
+    # Max of 5 clues.
+    if this_game.current_clue_index < 4:
+        this_game.move_on_to_next_clue()
+        if last_guess_was_wrong:
+            speech_output = strings.WRONG_ANSWER_CLUES_REMAIN + this_game.current_clue
+        speech_output = strings.NEXT_CLUE + this_game.current_clue
+    # Already on the last clue, repeat it.
     else:
-        next_clue = current_clue
-        speech_output = NO_MORE_CLUES.format(current_clue)
+        speech_output = strings.NO_MORE_CLUES.format(this_game.current_clue)
 
-    attributes = {
-        "current_question_index": current_question_index,
-        "current_clue_index": current_clue_index,
-        "questions": game_questions,
-        "score": current_score,
-        "game_length": game_length,
-        "game_status": "in_progress",
-        "current_clue": next_clue,
-        "player_info": session['attributes']['player_info'],
-        "play_newest_word_pack": play_newest_word_pack
-    }
-
-    return speech(speech_output, attributes, should_end_session, None)
+    return speech(tts=speech_output,
+                  attributes=this_game.attributes,
+                  should_end_session=False)
 
 
-def repeat_clue_request(session):
-    """give player the last clue"""
-    print("=====repeat_clue_request fired...")
-    attributes = {}
-    game_questions = session['attributes']['questions']
-    game_length = session['attributes']['game_length']
-    current_score = session['attributes']['score']
-    current_question_index = session['attributes']['current_question_index']
-    current_clue_index = session['attributes']['current_clue_index']
-    play_newest_word_pack = session['attributes']['play_newest_word_pack']
-    current_clue = game_questions[current_question_index]['clues'][current_clue_index]
-    should_end_session = False
-    speech_output = "The last clue was:  " + current_clue
+def repeat_clue_request(this_game):
+    """ Repeat the last clue """
+    logger.debug("=====repeat_clue_request fired...")
 
-    attributes = {
-        "current_question_index": current_question_index,
-        "current_clue_index": current_clue_index,
-        "questions": game_questions,
-        "score": current_score,
-        "game_length": game_length,
-        "game_status": "in_progress",
-        "current_clue": current_clue,
-        "player_info": session['attributes']['player_info'],
-        "play_newest_word_pack": play_newest_word_pack
-    }
+    speech_output = "The last clue was:  " + this_game.current_clue
 
-    return speech(speech_output, attributes, should_end_session, None)
+    return speech(tts=speech_output,
+                  attributes=this_game.attributes,
+                  should_end_session=False)
 
 
 def log_wrong_answer(answer, correct_answer):
-    """log all questions answered incorrectly so i can analyze later"""
+    """ Log all questions answered incorrectly for analysis """
     logger.debug("[WRONG ANSWER]:" + answer +
                  ". Correct answer: " + correct_answer)
 
 
 def get_answer_from_(intent):
-    """parse the request to get the answer Alexa heard"""
+    """ Parse the request to get the answer Alexa heard """
     logger.debug("=====get_answer_from_intent fired...")
+
     if 'slots' in intent:
         try:
             synonym = intent['slots']['CatchAllAnswer']['resolutions']['resolutionsPerAuthority'][0]

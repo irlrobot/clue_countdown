@@ -8,9 +8,7 @@ import strings
 from manage_data import get_player_info
 from utility import (
     get_household_and_person_ids,
-    determine_welcome_message,
-    questions_loaded_in,
-    get_game_status
+    determine_welcome_message
 )
 from play_new_game import play_new_game
 from handle_answer_request import (
@@ -19,6 +17,7 @@ from handle_answer_request import (
     repeat_clue_request
 )
 from alexa_responses import play_end_message, speech
+from session_attributes import SessionAttributes
 
 
 logger = logging.getLogger(__name__)
@@ -66,37 +65,44 @@ def on_intent(intent, session):
     intent_name = intent['name']
     logger.debug("=====IntentRequest: %s", intent_name)
 
+    if 'attributes' in session:
+        this_game = SessionAttributes(session['attributes'])
+    else:
+        # TODO if they used a one-shot and no game in progress, start a new game?
+        this_game = {}
+
     if intent_name == "AnswerIntent":
-        return answer_intent(intent, session)
+        return answer_intent(intent, this_game)
     if intent_name == "NextClueIntent":
-        return next_clue_intent(session)
+        return next_clue_intent(this_game)
     if intent_name == "NotSureIntent":
-        return not_sure_intent(intent, session)
+        return not_sure_intent(intent, this_game)
     if intent_name == "RepeatIntent":
-        return repeat_intent(session)
+        return repeat_intent(this_game)
     if intent_name == "AMAZON.StartOverIntent":
-        return start_over_intent(session)
+        return start_over_intent(this_game)
     if intent_name == "AMAZON.YesIntent":
-        return yes_intent(intent, session)
+        return yes_intent(intent, this_game)
     if intent_name == "AMAZON.NoIntent":
-        return no_intent(intent, session)
+        return no_intent(intent, this_game)
     if intent_name in ("AMAZON.StopIntent", "AMAZON.CancelIntent"):
         return play_end_message()
     if intent_name == 'AMAZON.HelpIntent':
-        return help_intent(session)
+        return help_intent(this_game)
 
 
-def answer_intent(intent, session):
+def answer_intent(intent, this_game):
     """ Handles AnswerIntent """
     logger.debug("=====answer_intent fired...")
-    if questions_loaded_in(session):
-        return handle_answer_request(intent, session)
+    game_status = this_game.game_status()
+    if game_status == "in_progress":
+        return handle_answer_request(intent, this_game)
 
     # If the game hasn't started yet, the player may have
     # interrupted Alexa during the rules being read to them.
-    if get_game_status(session) == "not_yet_started":
+    if game_status == "not_yet_started":
         return speech(tts=strings.HELP_MESSAGE_BEFORE_GAME,
-                      attributes=session['attributes'],
+                      attributes=this_game.attributes,
                       should_end_session=False,
                       reprompt=strings.WELCOME_REPROMPT)
 
@@ -106,18 +112,19 @@ def answer_intent(intent, session):
     return play_end_message()
 
 
-def next_clue_intent(session):
+def next_clue_intent(this_game):
     """ Handle NextClueIntent """
     logger.debug("=====next_clue_intent fired...")
-    game_status = get_game_status(session)
+    game_status = this_game.game_status()
+
     if game_status == "in_progress":
-        return next_clue_request(session=session, was_wrong_answer=False)
+        return next_clue_request(this_game, False)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.
     if game_status == "not_yet_started":
         return speech(tts=strings.HELP_MESSAGE_BEFORE_GAME,
-                      attributes=session['attributes'],
+                      attributes=this_game.attributes,
                       should_end_session=False,
                       reprompt=strings.WELCOME_REPROMPT)
 
@@ -128,23 +135,24 @@ def next_clue_intent(session):
     return play_end_message()
 
 
-def not_sure_intent(intent, session):
+def not_sure_intent(intent, this_game):
     """ Handle NotSureIntent """
     logger.debug("=====not_sure_intent fired...")
-    game_status = get_game_status(session)
+    game_status = this_game.game_status()
 
     if game_status == "in_progress":
         # If we're on the last clue then count this as an answer.
-        if session['attributes']['current_clue_index'] == 4:
-            return handle_answer_request(intent, session)
+        if this_game.current_clue_index == 4:
+            return handle_answer_request(intent, this_game)
 
-        return next_clue_request(session, False)
+        # Otherwise we go to the next clue.
+        return next_clue_request(this_game, False)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.
     if game_status == "not_yet_started":
         return speech(tts=strings.HELP_MESSAGE_BEFORE_GAME,
-                      attributes=session['attributes'],
+                      attributes=this_game.attributes,
                       should_end_session=False,
                       reprompt=strings.WELCOME_REPROMPT)
 
@@ -155,19 +163,19 @@ def not_sure_intent(intent, session):
     return play_end_message()
 
 
-def repeat_intent(session):
+def repeat_intent(this_game):
     """ Handle RepeatIntent """
     logger.debug("=====repeat_intent fired...")
-    game_status = get_game_status(session)
+    game_status = this_game.game_status()
 
     if game_status == "in_progress":
-        return repeat_clue_request(session)
+        return repeat_clue_request(this_game)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.
     if game_status == "not_yet_started":
         return speech(tts=strings.HELP_MESSAGE_BEFORE_GAME,
-                      attributes=session['attributes'],
+                      attributes=this_game.attributes,
                       should_end_session=False,
                       reprompt=strings.WELCOME_REPROMPT)
 
@@ -178,73 +186,72 @@ def repeat_intent(session):
     return play_end_message()
 
 
-def start_over_intent(session):
+def start_over_intent(this_game):
     """ Handle StartOverIntent """
     logger.debug("=====start_over_intent fired...")
-    game_status = get_game_status(session)
+    game_status = this_game.game_status()
 
     if game_status == "in_progress":
-        return play_new_game(True, session['attributes']['player_info'])
+        return play_new_game(True, this_game.player_info)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.
     if game_status == "not_yet_started":
         return speech(tts=strings.HELP_MESSAGE_BEFORE_GAME,
-                      attributes=session['attributes'],
+                      attributes=this_game.attributes,
                       should_end_session=False,
                       reprompt=strings.WELCOME_REPROMPT)
 
     # If the game is over start a new one.
     if game_status == "ended":
-        return play_new_game(True, session['attributes']['player_info'])
+        return play_new_game(True, this_game.player_info)
 
 
-def yes_intent(intent, session):
+def yes_intent(intent, this_game):
     """ Handle YesIntent """
     logger.debug("=====yes_intent fired...")
-    game_status = get_game_status(session)
+    game_status = this_game.game_status()
 
     # If there is a game in progress we treat this as a wrong answer.
     if game_status == "in_progress":
-        return handle_answer_request(intent, session)
+        return handle_answer_request(intent, this_game)
 
     # If it's not started yet the player wants to hear the rules.
     if game_status == "not_yet_started":
         return speech(tts=strings.HELP_MESSAGE_BEFORE_GAME,
-                      attributes=session['attributes'],
+                      attributes=this_game.attributes,
                       should_end_session=False,
                       reprompt=strings.WELCOME_REPROMPT)
 
     # Otherwise they're trying to play the game again after finishing a game.
-    return play_new_game(True, session['attributes']['player_info'])
+    return play_new_game(True, this_game.player_info)
 
 
-def no_intent(intent, session):
+def no_intent(intent, this_game):
     """ Handle NoIntent """
     logger.debug("=====no_intent fired...")
-    game_status = get_game_status(session)
+    game_status = this_game.game_status()
 
     # If there is a game in progress we treat this as a wrong answer.
     if game_status == "in_progress":
-        return handle_answer_request(intent, session)
+        return handle_answer_request(intent, this_game)
 
     # If it's not started yet the player does not want the rules.
     if game_status == "not_yet_started":
-        return play_new_game(False, session['attributes']['player_info'])
+        return play_new_game(False, this_game.player_info)
 
     # Otherwise end the game.
     return play_end_message()
 
 
-def help_intent(session):
+def help_intent(this_game):
     """ Handle HelpIntent """
     logger.debug("=====help_intent fired...")
     tts = strings.HELP_MESSAGE_BEFORE_GAME
 
-    if get_game_status(session) == "in_progress":
-        clue = session['attributes']['current_clue']
-        tts = strings.HELP_MESSAGE_DURING_GAME + clue
+    if this_game.game_status() == "in_progress":
+        tts = strings.HELP_MESSAGE_DURING_GAME + this_game.current_clue
 
     return speech(tts=tts,
-                  attributes=session['attributes'],
+                  attributes=this_game.attributes,
                   should_end_session=False)

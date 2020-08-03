@@ -11,6 +11,7 @@ class SessionAttributes():
         self.questions = None
         self.game_length = None
         self.total_score = None
+        self.current_clue = None
         self.current_clue_index = None
         self.play_newest_word_pack = None
         self.current_score = None
@@ -48,6 +49,12 @@ class SessionAttributes():
     def get_first_clue(self):
         return self.questions[self.current_question_index]['clues'][0]
 
+    def move_on_to_next_clue(self):
+        setattr(self, 'current_clue_index',
+                self.current_clue_index + 1)
+        setattr(self, 'current_clue',
+                self.questions[self.current_question_index]['clues'][self.current_clue_index])
+
     def get_customer_id(self):
         return self.player_info['customerID']['S']
 
@@ -55,3 +62,6 @@ class SessionAttributes():
         player_info = self.player_info
         games_played = int(player_info['gamesPlayed']['N']) + 1
         player_info['gamesPlayed']['N'] = games_played
+
+    def update_game_status(self, status):
+        setattr(self, 'game_status', status)
