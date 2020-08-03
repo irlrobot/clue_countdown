@@ -142,7 +142,7 @@ def end_game_return_score(current_score, player_info, answered_correctly,
             customer_id, new_lifetime_score, new_games_played, current_score)
 
     card_title = "Game Results"
-    reprompt = "Would you like to play Words Plus Clues again?"
+    reprompt = "Would you like to play Clue Countdown again?"
     return speech_with_card(speech_output, attributes, should_end_session,
                             card_title, card_text, answered_correctly, reprompt)
 
