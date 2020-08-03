@@ -15,8 +15,7 @@
 [X] Add lastScore attribute
 [X] Household head to head working
 [X] Fix SSML, she sounds flat
-  [] On correct answer, "Nailed It" still sounds awful
-[] Install python-Levenshtein in Lambda, problem building with alppb
+  [X] On correct answer, "Nailed It" still sounds awful
 [] Refactor
 [] APL
 [] Voice diagram to walk through
@@ -26,3 +25,4 @@
 [] Add the ability to resume a game if the player times out
 [] Finding an opponent now happens before we even determine whether or not they are valid TODO 1
 [] Record an intro message for first time/new players using my voice
+[] Install python-Levenshtein in Lambda
