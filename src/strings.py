@@ -155,6 +155,13 @@ I've already given you all the clues!  The last clue was: {}". What word am I th
 </amazon:emotion>
 """
 
+NEXT_ROUND_WITH_CLUE = """
+<amazon:emotion name="excited" intensity="medium">
+Get ready.  Next round in 3... 2... 1...
+</amazon:emotion>
+{}
+"""
+
 
 def random_correct_answer_message(correct_answer):
     """ Return a random encouraging phrase for getting a right answer """
