@@ -4,7 +4,7 @@ Strings
 import random
 
 
-WELCOME_BACK_MESSAGE_1 = """
+WELCOME_BACK_1 = """
 <amazon:emotion name="excited" intensity="medium">
 Hey there, welcome back to Words Plus Clues!
 </amazon:emotion>
@@ -13,7 +13,7 @@ You've earned a grand total of {} points playing. Nice! Do you need a refresher 
 </amazon:emotion>
 """
 
-WELCOME_BACK_MESSAGE_2 = """
+WELCOME_BACK_2 = """
 <amazon:emotion name="excited" intensity="medium">
 Look who's back for more Words Plus Clues! 
 </amazon:emotion>
@@ -22,7 +22,7 @@ Last time you played you earned {} points. Let's see what you can do this game! 
 </amazon:emotion>
 """
 
-WELCOME_BACK_MESSAGE_PERSONALIZED_1 = """
+WELCOME_BACK_PERSONALIZED_1 = """
 <amazon:emotion name="excited" intensity="medium">
 Hey <alexa:name type="first" personId="{}"/>, welcome back to Words Plus Clues! 
 </amazon:emotion>
@@ -31,7 +31,7 @@ You've earned a grand total of {} points playing. Nice! Do you need a refresher 
 </amazon:emotion>
 """
 
-WELCOME_BACK_MESSAGE_PERSONALIZED_2 = """
+WELCOME_BACK_PERSONALIZED_2 = """
 <amazon:emotion name="excited" intensity="medium">
 Look who's back for more Words Plus Clues it's <alexa:name type="first" personId="{}"/>! 
 </amazon:emotion>
@@ -40,7 +40,7 @@ Last time you played you earned {} points. Let's see what you can do this game! 
 </amazon:emotion>
 """
 
-WELCOME_BACK_MESSAGE_OPPONENT_1 = """
+WELCOME_BACK_OPPONENT_1 = """
 <amazon:emotion name="excited" intensity="medium">
 Welcome back to Words Plus Clues <alexa:name type="first" personId="{}"/>! 
 </amazon:emotion>
@@ -50,7 +50,7 @@ Do you need me to remind you of the rules before we start the game?
 </amazon:emotion>
 """
 
-WELCOME_BACK_MESSAGE_OPPONENT_2 = """
+WELCOME_BACK_OPPONENT_2 = """
 <amazon:emotion name="excited" intensity="medium">
 <alexa:name type="first" personId="{}"/> is in the house and ready for more Words Plus Clues! 
 </amazon:emotion>
@@ -105,12 +105,12 @@ The first clue is...
 </amazon:emotion>
 """
 
-FIRST_GAME_MESSAGE = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
+FIRST_GAME = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
     "Thanks for playing Words Plus Clues!</amazon:emotion> " + \
     HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
 
-FIRST_GAME_MESSAGE_PERSONALIZED = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
+FIRST_GAME_PERSONALIZED = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
     "Thanks for playing Words Plus Clues <alexa:name type=\"first\" personId=\"{}\"/>!" +\
     "</amazon:emotion> " + HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
