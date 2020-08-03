@@ -65,11 +65,7 @@ def on_intent(intent, session):
     intent_name = intent['name']
     logger.debug("=====IntentRequest: %s", intent_name)
 
-    if 'attributes' in session:
-        this_game = SessionAttributes(session['attributes'])
-    else:
-        # TODO if they used a one-shot and no game in progress, start a new game?
-        this_game = {}
+    this_game = SessionAttributes(session['attributes'])
 
     if intent_name == "AnswerIntent":
         return answer_intent(intent, this_game)
@@ -210,7 +206,7 @@ def start_over_intent(this_game):
 def yes_intent(intent, this_game):
     """ Handle YesIntent """
     logger.debug("=====yes_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
 
     # If there is a game in progress we treat this as a wrong answer.
     if game_status == "in_progress":
