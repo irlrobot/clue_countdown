@@ -122,7 +122,7 @@ The next clue is...
 """
 
 WRONG_ANSWER_CLUES_REMAIN = "<amazon:emotion name=\"excited\" intensity=\"medium\">" +\
-    "Good guess, but that's not the word!</amazon:emotion> " + \
+    "Good guess, but that's not the word I am thinking of!</amazon:emotion> " + \
     NEXT_CLUE
 
 WELCOME_REPROMPT = "Do you need to hear the rules for the game again?"
