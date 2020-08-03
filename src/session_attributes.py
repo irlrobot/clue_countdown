@@ -6,16 +6,6 @@ A class for managing session attributes during the game
 class SessionAttributes():
     def __init__(self, attributes):
         self.attributes = attributes
-        self.game_status = None
-        self.player_info = None
-        self.questions = None
-        self.game_length = None
-        self.total_score = None
-        self.current_clue = None
-        self.current_clue_index = None
-        self.play_newest_word_pack = None
-        self.current_score = None
-        self.current_question_index = None
         self.parse_attributes()
 
     def parse_attributes(self):
