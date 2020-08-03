@@ -44,10 +44,10 @@ def get_player_info(customer_id, person_id):
 
     # If we find a returning player return their profile.
     if 'Item' in response:
-        logger.debug("=====found player: %s", str(response['Item']))
+        logger.debug("=====Returning Player: %s", str(response['Item']))
         return response['Item']
 
-    logger.debug("=====new customer...")
+    logger.debug("=====New Customer...")
     return {
         'customerID': {
             'S': player
