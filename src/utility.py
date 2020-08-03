@@ -117,7 +117,7 @@ def questions_loaded_in(session):
     return False
 
 
-def game_status(session):
+def get_game_status(session):
     """ Return the status of the game based on the session state.
     If there is no attributes in the session return not_yet_started """
     logger.debug("=====get_game_status fired...")
