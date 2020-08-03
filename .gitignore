@@ -4,3 +4,4 @@ venv/
 .coverage
 __pycache__/
 .pytest_cache
+lambda_function.zip
