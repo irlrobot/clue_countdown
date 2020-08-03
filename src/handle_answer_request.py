@@ -22,7 +22,7 @@ def handle_answer_request(intent, session):
     logger.debug("=====handle_answer_request fired...")
     # Setup.
     attributes = {}
-    answer = get_answer_from_intent(intent)
+    answer = get_answer_from_(intent)
     questions = session['attributes']['questions']
     game_length = session['attributes']['game_length']
     current_score = session['attributes']['score']
@@ -221,7 +221,7 @@ def log_wrong_answer(answer, correct_answer):
                  ". Correct answer: " + correct_answer)
 
 
-def get_answer_from_intent(intent):
+def get_answer_from_(intent):
     """parse the request to get the answer Alexa heard"""
     logger.debug("=====get_answer_from_intent fired...")
     if 'slots' in intent:
