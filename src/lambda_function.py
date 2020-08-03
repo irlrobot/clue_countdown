@@ -90,7 +90,7 @@ def on_intent(intent, session):
 def answer_intent(intent, this_game):
     """ Handles AnswerIntent """
     logger.debug("=====answer_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
     if game_status == "in_progress":
         return handle_answer_request(intent, this_game)
 
@@ -111,7 +111,7 @@ def answer_intent(intent, this_game):
 def next_clue_intent(this_game):
     """ Handle NextClueIntent """
     logger.debug("=====next_clue_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
 
     if game_status == "in_progress":
         return next_clue_request(this_game, False)
@@ -134,7 +134,7 @@ def next_clue_intent(this_game):
 def not_sure_intent(intent, this_game):
     """ Handle NotSureIntent """
     logger.debug("=====not_sure_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
 
     if game_status == "in_progress":
         # If we're on the last clue then count this as an answer.
@@ -162,7 +162,7 @@ def not_sure_intent(intent, this_game):
 def repeat_intent(this_game):
     """ Handle RepeatIntent """
     logger.debug("=====repeat_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
 
     if game_status == "in_progress":
         return repeat_clue_request(this_game)
@@ -185,7 +185,7 @@ def repeat_intent(this_game):
 def start_over_intent(this_game):
     """ Handle StartOverIntent """
     logger.debug("=====start_over_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
 
     if game_status == "in_progress":
         return play_new_game(True, this_game.player_info)
@@ -226,7 +226,7 @@ def yes_intent(intent, this_game):
 def no_intent(intent, this_game):
     """ Handle NoIntent """
     logger.debug("=====no_intent fired...")
-    game_status = this_game.game_status()
+    game_status = this_game.game_status
 
     # If there is a game in progress we treat this as a wrong answer.
     if game_status == "in_progress":
