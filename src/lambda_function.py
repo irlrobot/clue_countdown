@@ -50,13 +50,13 @@ def launch_request(household_id, person_id):
 
     tts = determine_welcome_message(household_id, person_id, player)
 
-    attributes = {
+    session_attributes = {
         "game_status": "not_yet_started",
         "player_info": player
     }
 
     return speech(tts=tts,
-                  attributes=attributes,
+                  attributes=session_attributes,
                   should_end_session=False,
                   reprompt=strings.WELCOME_REPROMPT)
 
