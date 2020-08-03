@@ -36,14 +36,14 @@ def determine_welcome_message(household_id, person_id, player):
         # No voice profile, no personalization.
         if person_id == "default":
             if player['lastScore']['N'] == "0":
-                tts = strings.WELCOME_BACK_MESSAGE_1.format(
+                tts = strings.WELCOME_BACK_1.format(
                     player['lifetimeScore']['N'])
             # If their last score was greater than 0 we have more options.
             elif random_number == 0:
-                tts = strings.WELCOME_BACK_MESSAGE_1.format(
+                tts = strings.WELCOME_BACK_1.format(
                     player['lifetimeScore']['N'])
             elif random_number == 1:
-                tts = strings.WELCOME_BACK_MESSAGE_2.format(
+                tts = strings.WELCOME_BACK_2.format(
                     player['lastScore']['N'])
         # If we have a returning player with a voice profile we personalize.
         else:
@@ -69,12 +69,12 @@ def determine_welcome_message(household_id, person_id, player):
                     if date_opponent_last_played > date_7_days_ago:
                         logger.debug(
                             "=====Opponent has played within the last week....")
-                        tts = strings.WELCOME_BACK_MESSAGE_OPPONENT_1.format(
+                        tts = strings.WELCOME_BACK_OPPONENT_1.format(
                             person_id, opponent_id, opponent['lastScore']['N'])
                     else:
                         logger.debug(
                             "=====Opponent has not played recently....")
-                        tts = strings.WELCOME_BACK_MESSAGE_OPPONENT_2.format(
+                        tts = strings.WELCOME_BACK_OPPONENT_2.format(
                             person_id, opponent_id)
                 else:
                     logger.debug("=====No valid opponent found....")
@@ -103,3 +103,26 @@ def determine_welcome_message(household_id, person_id, player):
             tts = strings.FIRST_GAME_PERSONALIZED.format(person_id)
 
     return tts
+
+
+def questions_loaded_in(session):
+    """ Check if questions are loaded in the session.
+    This is one of a few ways to tell if a game is in progress """
+    logger.debug("=====questions_loaded_in fired...")
+
+    if 'attributes' in session:
+        if 'questions' in session['attributes']:
+            return True
+
+    return False
+
+
+def game_status(session):
+    """ Return the status of the game based on the session state.
+    If there is no attributes in the session return not_yet_started """
+    logger.debug("=====get_game_status fired...")
+
+    if 'attributes' in session:
+        return session['attributes']['game_status']
+
+    return "not_yet_started"
