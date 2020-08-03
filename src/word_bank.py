@@ -177,7 +177,7 @@ QUESTIONS = [
     },
     {
         "code_word": "Dragon",
-        "clues": ["fire breathing", "creature", "myth", "Daenerys is the mother of",
+        "clues": ["fire breathing", "creature", "mythical flying beast", "Daenerys is the mother of",
                   "comes in many colors"]
     },
     {
@@ -252,7 +252,7 @@ QUESTIONS = [
     },
     {
         "code_word": "pickle",
-        "clues": ["cucumber", "in a jam", "messy situation", "green", "vinegar",
+        "clues": ["cucumber plus vinegar", "also means to be in a jam", "messy situation", "they are green", "vinegar",
                   "technically a fruit"]
     },
     {
@@ -300,8 +300,8 @@ QUESTIONS = [
     },
     {
         "code_word": "dice",
-        "clues": ["knife skills", "roll the blank", "you use them in Vegas",
-                  "hopefully they're not loaded", "snake eyes"]
+        "clues": ["also a knife chopping technique", "they have six sides", "you use them in Vegas",
+                  "used in a variety of table games", "snake eyes"]
     },
     {
         "code_word": "nerd",
