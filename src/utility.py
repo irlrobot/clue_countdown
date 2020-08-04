@@ -20,7 +20,7 @@ def get_household_and_person_ids(event):
     else:
         person_id = "default"
 
-    logger.debug("=====Person ID: %s", household_id)
+    logger.debug("=====Household ID: %s", household_id)
     logger.debug("=====Person ID: %s", person_id)
     return household_id, person_id
 
