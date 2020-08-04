@@ -1,3 +1,6 @@
+# Bugs
+[] Scoring is jacked, look into it
+
 # Prioritized
 [X] Personalization working
   [X] Personalize the First Time experience
