@@ -29,8 +29,7 @@ def handle_answer_request(intent, this_game):
 
     # Currently using a hardcoded score of 60 or better.
     if correct_answer in answer_heard or fuzzy_score >= 60:
-        this_game.update_total_score(
-            current_question_value + this_game.total_score)
+        this_game.update_total_score(current_question_value)
 
         answered_correctly = True
     else:
@@ -51,7 +50,7 @@ def handle_answer_request(intent, this_game):
                                      answer_heard, correct_answer)
 
     # If that wasn't the last word in the game continue on to next word.
-    this_game.move_on_to_next_question()
+    this_game.move_on_to_next_word()
     speech_output = strings.NEXT_ROUND_WITH_CLUE.format(
         this_game.get_first_clue())
 
@@ -82,7 +81,8 @@ def end_game_return_score(this_game, answered_correctly,
     logger.debug("=====end_game_return_score fired...")
     this_game.increment_total_games_played()
     this_game.update_game_status("ended")
-    update_dynamodb(this_game.get_customer_id(), this_game.player_info)
+    update_dynamodb(this_game.get_customer_id(),
+                    this_game.ddb_formatted_attributes())
 
     wrap_up_speech = strings.END_GAME_WRAP_UP.format(
         str(this_game.total_score))
