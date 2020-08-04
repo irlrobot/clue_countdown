@@ -21,7 +21,7 @@
 [] Voice diagram to walk through
 [] APL and refactor alexa_responses.py
   [] Remove the sound prompt? It may be more annoying than it's worth.
-
+[] Finish new word pack and add slot values and synonyms!
 
 
 [] Add the ability to resume a game if the player times out
