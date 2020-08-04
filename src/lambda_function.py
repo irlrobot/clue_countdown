@@ -188,7 +188,7 @@ def start_over_intent(this_game):
     game_status = this_game.game_status
 
     if game_status == "in_progress":
-        return play_new_game(this_game.player_info, replay=True)
+        return play_new_game(this_game, replay=True)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.
@@ -200,7 +200,7 @@ def start_over_intent(this_game):
 
     # If the game is over start a new one.
     if game_status == "ended":
-        return play_new_game(this_game.player_info, replay=True)
+        return play_new_game(this_game, replay=True)
 
 
 def yes_intent(intent, this_game):
@@ -220,7 +220,7 @@ def yes_intent(intent, this_game):
                       reprompt=strings.WELCOME_REPROMPT)
 
     # Otherwise they're trying to play the game again after finishing a game.
-    return play_new_game(this_game.player_info, replay=True)
+    return play_new_game(this_game, replay=True)
 
 
 def no_intent(intent, this_game):
@@ -234,7 +234,7 @@ def no_intent(intent, this_game):
 
     # If it's not started yet the player does not want the rules.
     if game_status == "not_yet_started":
-        return play_new_game(this_game.player_info, replay=False)
+        return play_new_game(this_game, replay=False)
 
     # Otherwise end the game.
     return play_end_message()
