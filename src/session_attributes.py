@@ -5,12 +5,7 @@ A class for managing session attributes during the game
 
 class SessionAttributes():
     def __init__(self, attributes):
-        self.attributes = attributes
-        self.parse_attributes()
-
-    def parse_attributes(self):
-        for key, value in self.attributes.items():
-            setattr(self, key, value)
+        self.__dict__ = attributes
 
     def get_answer_for_current_question(self):
         return self.questions[self.current_question_index]['code_word'].lower()
@@ -20,14 +15,14 @@ class SessionAttributes():
         player_info['lastWordPackPlayed']['N'] = pack_num
         setattr(self, 'player_info', player_info)
 
-    def update_total_score(self, total_score):
-        setattr(self, 'total_score', total_score)
+    def update_total_score(self, new_score):
+        setattr(self, 'total_score', new_score)
 
         player_info = self.player_info
         new_lifetime_score = int(
-            player_info['lifetimeScore']['N']) + total_score
+            player_info['lifetimeScore']['N']) + new_score
         player_info['lifetimeScore']['N'] = new_lifetime_score
-        player_info['lastScore']['N'] = total_score
+        player_info['lastScore']['N'] = new_score
 
     def move_on_to_next_question(self):
         setattr(self, 'current_question_index',
@@ -55,3 +50,12 @@ class SessionAttributes():
 
     def update_game_status(self, status):
         setattr(self, 'game_status', status)
+
+    @property
+    def attributes(self):
+        return self.__dict__
+
+    def ddb_stats_only(self):
+        ddb = self.player_info.copy()
+        ddb.pop('customerID')
+        return ddb
