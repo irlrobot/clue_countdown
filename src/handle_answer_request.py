@@ -31,6 +31,7 @@ def handle_answer_request(intent, this_game):
     if correct_answer in answer_heard or fuzzy_score >= 60:
         this_game.update_total_score(
             current_question_value + this_game.total_score)
+
         answered_correctly = True
     else:
         log_wrong_answer(answer_heard, correct_answer)
@@ -118,7 +119,8 @@ def next_clue_request(this_game, last_guess_was_wrong):
         this_game.move_on_to_next_clue()
         if last_guess_was_wrong:
             speech_output = strings.WRONG_ANSWER_CLUES_REMAIN + this_game.current_clue
-        speech_output = strings.NEXT_CLUE + this_game.current_clue
+        else:
+            speech_output = strings.NEXT_CLUE + this_game.current_clue
     # Already on the last clue, repeat it.
     else:
         speech_output = strings.NO_MORE_CLUES.format(this_game.current_clue)
