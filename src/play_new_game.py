@@ -45,7 +45,7 @@ def play_new_game(replay, player_info):
     should_end_session = False
     attributes = {
         "questions": questions,
-        "score": 0,
+        "total_score": 0,
         "current_question_index": 0,
         "current_clue_index": 0,
         "game_length": len(questions),
