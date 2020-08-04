@@ -97,3 +97,37 @@ class SessionAttributes():
                 }
             }
         }
+
+    def get_last_played_work_pack_id(self):
+        """ Return the id of the last played word pack """
+        try:
+            return int(self.player_info['lastWordPackPlayed']['N'])
+        except KeyError as _err:
+            # If the lastWordPackPlayed key is missing we
+            # just set play_newest_word_pack to True.
+            self.update_last_word_pack_played(0)
+            return int(self.player_info['lastWordPackPlayed']['N'])
+
+    def should_play_newest_word_pack(self, newest_pack_id):
+        """ Return whether or not the player 
+        should play the newest word pack """
+        if self.get_last_played_work_pack_id() < newest_pack_id:
+            return True
+
+        return False
+
+    def setup_new_game_attributes(self, questions, play_newest_word_pack):
+        """ Setup game attributes when starting a new game """
+        attributes = {
+            "questions": questions,
+            "total_score": 0,
+            "current_question_index": 0,
+            "current_clue_index": 0,
+            "game_length": len(questions),
+            "game_status": "in_progress",
+            "current_clue": questions[0]['clues'][0],
+            "play_newest_word_pack": play_newest_word_pack
+        }
+
+        for key, value in attributes.items():
+            setattr(self, key, value)
