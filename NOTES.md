@@ -16,10 +16,12 @@
 [X] Household head to head working
 [X] Fix SSML, she sounds flat
   [X] On correct answer, "Nailed It" still sounds awful
-[] Refactor
-[] APL
+[X] Refactor
+[] New logo
 [] Voice diagram to walk through
-[] Remove the sound prompt, it just causes delay
+[] APL and refactor alexa_responses.py
+  [] Remove the sound prompt? It may be more annoying than it's worth.
+
 
 
 [] Add the ability to resume a game if the player times out
