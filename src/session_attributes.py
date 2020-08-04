@@ -93,7 +93,7 @@ class SessionAttributes():
             },
             'lastScore': {
                 'Value': {
-                    'N': str(self.player_info['lastScore']['N'])
+                    'N': str(self.total_score)
                 }
             }
         }
