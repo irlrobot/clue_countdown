@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-def play_new_game(replay, player_info):
+def play_new_game(player_info, replay=None):
     """ Play new game intro and build question bank for the session """
     logger.debug("=====play_new_game fired...")
     logger.debug("=====Player Info: %s", player_info)
