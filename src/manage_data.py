@@ -71,6 +71,11 @@ def update_dynamodb(customer_id, attributes):
     """ Update the player's score and games played attribute """
     logger.debug("=====update_last_played_time fired...")
     client = create_client()
+    attributes['lastPlayed'] = {
+        'Value': {
+            'S': datetime.datetime.utcnow().isoformat()
+        }
+    }
 
     try:
         client.update_item(
