@@ -103,26 +103,3 @@ def determine_welcome_message(household_id, person_id, player):
             tts = strings.FIRST_GAME_PERSONALIZED.format(person_id)
 
     return tts
-
-
-def questions_loaded_in(session):
-    """ Check if questions are loaded in the session.
-    This is one of a few ways to tell if a game is in progress """
-    logger.debug("=====questions_loaded_in fired...")
-
-    if 'attributes' in session:
-        if 'questions' in session['attributes']:
-            return True
-
-    return False
-
-
-def get_game_status(session):
-    """ Return the status of the game based on the session state.
-    If there is no attributes in the session return not_yet_started """
-    logger.debug("=====get_game_status fired...")
-
-    if 'attributes' in session:
-        return session['attributes']['game_status']
-
-    return "not_yet_started"
