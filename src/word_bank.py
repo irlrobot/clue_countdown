@@ -56,7 +56,7 @@ CURRENT_PACK = [
     }
 ]
 
-QUESTIONS = [
+WORDS = [
     {
         "code_word": "Trump",
         "clues": ["president", "likes to tweet", "owns hotels", "rich", "build a wall",
