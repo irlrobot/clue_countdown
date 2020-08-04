@@ -245,7 +245,7 @@ def help_intent(this_game):
     logger.debug("=====help_intent fired...")
     tts = strings.HELP_MESSAGE_BEFORE_GAME
 
-    if this_game.game_status() == "in_progress":
+    if this_game.game_status == "in_progress":
         tts = strings.HELP_MESSAGE_DURING_GAME + this_game.current_clue
 
     return speech(tts=tts,
