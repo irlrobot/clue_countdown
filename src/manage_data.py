@@ -77,6 +77,7 @@ def update_dynamodb(customer_id, attributes):
         }
     }
 
+    logger.debug("=====Attributes to update: %s", attributes)
     try:
         client.update_item(
             TableName='code_word',
