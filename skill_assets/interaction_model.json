@@ -944,6 +944,31 @@
                                     "comic book"
                                 ]
                             }
+                        },
+                        {
+                            "name": {
+                                "value": "résumé"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "manager"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "raise"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "screen"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "candidate"
+                            }
                         }
                     ]
                 }
