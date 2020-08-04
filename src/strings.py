@@ -105,7 +105,7 @@ The first clue is...
 </amazon:emotion>
 """
 
-FIRST_GAME = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
+FIRST_GAME = "<amazon:emotion name=\"excited\" intensity=\"medium\">" +\
     "Thanks for playing Clue Countdown!</amazon:emotion> " + \
     HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
