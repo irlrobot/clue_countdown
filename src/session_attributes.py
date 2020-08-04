@@ -10,6 +10,11 @@ class SessionAttributes():
     def __init__(self, attributes):
         self.__dict__ = attributes
 
+    @property
+    def attributes(self):
+        """ All attributes """
+        return self.__dict__
+
     def get_answer_for_current_question(self):
         """ Returns the correct answer for the current question """
         return self.questions[self.current_question_index]['code_word'].lower()
@@ -63,11 +68,6 @@ class SessionAttributes():
         """ Changes the state of the game """
         setattr(self, 'game_status', status)
 
-    @property
-    def attributes(self):
-        """ All attributes """
-        return self.__dict__
-
     def ddb_formatted_attributes(self):
         """ Attributes formatted for sending to DDB """
         return {
@@ -109,7 +109,7 @@ class SessionAttributes():
             return int(self.player_info['lastWordPackPlayed']['N'])
 
     def should_play_newest_word_pack(self, newest_pack_id):
-        """ Return whether or not the player 
+        """ Return whether or not the player
         should play the newest word pack """
         if self.get_last_played_work_pack_id() < newest_pack_id:
             return True
