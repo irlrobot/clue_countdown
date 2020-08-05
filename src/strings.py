@@ -136,7 +136,7 @@ Thanks so much for playing Clue Countdown, see you next time!
 EXIT_WITH_REVIEW_REQUEST = """
 <amazon:emotion name="excited" intensity="medium">
 Thanks for playing Clue Countdown!
-If you had fun playing, please leave a 5 star review to support the creator."
+If you had fun playing, please leave a review to support the creator."
 </amazon:emotion>
 """
 
