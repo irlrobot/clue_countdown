@@ -2,9 +2,10 @@
 Send responses back to the Alexa service
 """
 from __future__ import print_function
+import json
 import logging
 import random
-from strings import STANDARD_EXIT_MESSAGE, EXIT_WITH_REVIEW_REQUEST
+import strings
 
 
 logger = logging.getLogger(__name__)
@@ -15,15 +16,11 @@ def speech(tts=None, attributes=None, should_end_session=None,
            answered_correctly=None, reprompt=None):
     """ Build speech output """
     logger.debug("======speech fired...")
-    sound = get_sound_effect_for_answer(answered_correctly)
-    prompt = prompt_sound(should_end_session)
+    sound_effect = get_sound_effect_for_answer(answered_correctly)
+    prompt_sound = get_prompt_sound(should_end_session)
 
     if reprompt is None:
-        reprompt_tts = """
-        <amazon:emotion name="excited" intensity="medium">
-        Time's up!  What's your guess?"
-        </amazon:emotion>
-        """
+        reprompt_tts = strings.STANDARD_REPROMPT
     else:
         reprompt_tts = reprompt
 
@@ -32,21 +29,23 @@ def speech(tts=None, attributes=None, should_end_session=None,
         "sessionAttributes": attributes,
         "response": {
             "shouldEndSession": should_end_session,
-            "outputSpeech": {
-                "type": "SSML",
-                "ssml": "<speak>" + sound + tts + prompt + "</speak>"
-            },
+            # "outputSpeech": {
+            #    "type": "SSML",
+            #    "ssml": "<speak>" + sound + tts + prompt + "</speak>"
+            # },
             "reprompt": {
                 "outputSpeech": {
                     "type": "SSML",
-                    "ssml": "<speak>" + str(reprompt_tts) + "</speak>"
+                    "ssml": "<speak>{}</speak>".format(reprompt_tts)
                 }
-            }
+            },
         }
     }
 
-    logger.debug("=====Response:  %s", str(response))
-    return response
+    response_with_apl = add_apl_to_response(
+        response, sound_effect, tts, prompt_sound)
+    logger.debug(json.dumps(response_with_apl))
+    return response_with_apl
 
 
 def speech_with_card(tts=None, attributes=None, should_end_session=None,
@@ -54,8 +53,8 @@ def speech_with_card(tts=None, attributes=None, should_end_session=None,
                      answered_correctly=None, reprompt=None):
     """ Build speech output with a card """
     logger.debug("======speech_with_card fired...")
-    sound = get_sound_effect_for_answer(answered_correctly)
-    prompt = prompt_sound(should_end_session)
+    sound_effect = get_sound_effect_for_answer(answered_correctly)
+    prompt_sound = get_prompt_sound(should_end_session)
 
     if reprompt is None:
         reprompt_tts = "Time's up!  What's your guess?"
@@ -66,10 +65,10 @@ def speech_with_card(tts=None, attributes=None, should_end_session=None,
         "sessionAttributes": attributes,
         "response": {
             "shouldEndSession": should_end_session,
-            "outputSpeech": {
-                "type": "SSML",
-                "ssml": "<speak>" + sound + tts + prompt + "</speak>"
-            },
+            # "outputSpeech": {
+            #    "type": "SSML",
+            #    "ssml": "<speak>{}{}{}</speak>".format(sound_effect, tts, prompt_sound)
+            # },
             "card": {
                 "type": "Standard",
                 "title": card_title,
@@ -90,15 +89,17 @@ def speech_with_card(tts=None, attributes=None, should_end_session=None,
         }
     }
 
-    logger.debug("=====Response:  %s", str(response))
-    return response
+    response_with_apl = add_apl_to_response(
+        response, sound_effect, tts, prompt_sound)
+    logger.debug(json.dumps(response_with_apl))
+    return response_with_apl
 
 
 def play_end_message():
     """ Play a standard message when exiting the skill """
     logger.debug("=====play_end_message fired...")
-    standard_message = STANDARD_EXIT_MESSAGE
-    review_message = EXIT_WITH_REVIEW_REQUEST
+    standard_message = strings.STANDARD_EXIT_MESSAGE
+    review_message = strings.EXIT_WITH_REVIEW_REQUEST
 
     # Don't always ask for a review.
     if random.randint(1, 10) == 1:
@@ -120,9 +121,66 @@ def get_sound_effect_for_answer(answer_was_right):
     return "<audio src=\"https://s3.amazonaws.com/trainthatbrain/wrong.mp3\" />"
 
 
-def prompt_sound(should_end_session):
+def get_prompt_sound(should_end_session):
     """ Determine if the prompt sound should play """
     if should_end_session:
         return ''
 
     return "<audio src=\"https://s3.amazonaws.com/trainthatbrain/prompt.mp3\" />"
+
+
+def add_apl_to_response(response, sound_effect, tts, prompt_sound):
+    """ Adds APL directives to a response """
+    directives = [
+        {
+            "type": "Alexa.Presentation.APLA.RenderDocument",
+            "token": "code-countdown",
+            "document": {
+                "version": "0.8",
+                "type": "APLA",
+                "mainTemplate": {
+                    "item": {
+                        "type": "Sequencer",
+                        "items": [
+                            {
+                                "type": "Mixer",
+                                "items": [
+                                    {
+                                        "type": "Sequencer",
+                                        "items": [{
+                                            "type": "Speech",
+                                            "contentType": "SSML",
+                                            "content": "<speak>{}{}</speak>".format(sound_effect, tts)
+                                        }]
+                                    },
+                                    {
+                                        "type": "Audio",
+                                        "description": "https://developer.amazon.com/en-US/docs/alexa/custom-skills/ask-soundlibrary.html",
+                                        "source": "soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_countdown_loop_64s_minimal_01",
+                                        "filter": [
+                                            {
+                                                "type": "Volume",
+                                                "amount": 0.7
+                                            },
+                                            {
+                                                "type": "Trim",
+                                                "end": 3500
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Speech",
+                                "contentType": "SSML",
+                                "content": "<speak>{}</speak>".format(prompt_sound)
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+
+    response["response"]["directives"] = directives
+    return response
