@@ -3,7 +3,7 @@ Words and Clues!
 """
 CURRENT_PACK_ID = 9
 CURRENT_PACK_THEME = "Interviewing for a job"
-CURRENT_PACK = [
+[
     {
         "code_word": "résumé",
         "clues": ["a list of work experience",
@@ -57,7 +57,7 @@ CURRENT_PACK = [
     }
 ]
 
-WORDS = [
+QUESTIONS = [
     {
         "code_word": "Trump",
         "clues": ["president", "likes to tweet", "owns hotels", "rich", "build a wall",
@@ -178,7 +178,7 @@ WORDS = [
     },
     {
         "code_word": "Dragon",
-        "clues": ["fire breathing", "creature", "mythical flying beast", "Daenerys is the mother of",
+        "clues": ["fire breathing", "creature", "myth", "Daenerys is the mother of",
                   "comes in many colors"]
     },
     {
@@ -253,7 +253,7 @@ WORDS = [
     },
     {
         "code_word": "pickle",
-        "clues": ["cucumber plus vinegar", "also means to be in a jam", "messy situation", "they are green", "vinegar",
+        "clues": ["cucumber", "in a jam", "messy situation", "green", "vinegar",
                   "technically a fruit"]
     },
     {
@@ -301,8 +301,8 @@ WORDS = [
     },
     {
         "code_word": "dice",
-        "clues": ["also a knife chopping technique", "they have six sides", "you use them in Vegas",
-                  "used in a variety of table games", "snake eyes"]
+        "clues": ["knife skills", "roll the blank", "you use them in Vegas",
+                  "hopefully they're not loaded", "snake eyes"]
     },
     {
         "code_word": "nerd",

@@ -67,17 +67,11 @@ def get_player_info(customer_id, person_id):
     }
 
 
-def update_dynamodb(customer_id, attributes):
+def update_score_and_games(customer_id, score, games_played, last_score):
     """ Update the player's score and games played attribute """
     logger.debug("=====update_last_played_time fired...")
     client = create_client()
-    attributes['lastPlayed'] = {
-        'Value': {
-            'S': datetime.datetime.utcnow().isoformat()
-        }
-    }
 
-    logger.debug("=====Attributes to update: %s", attributes)
     try:
         client.update_item(
             TableName='code_word',
@@ -86,7 +80,76 @@ def update_dynamodb(customer_id, attributes):
                     'S': customer_id
                 }
             },
-            AttributeUpdates=attributes
+            AttributeUpdates={
+                'lifetimeScore': {
+                    'Value': {
+                        'N': str(score)
+                    }
+                },
+                'gamesPlayed': {
+                    'Value': {
+                        'N': str(games_played)
+                    }
+                },
+                'lastPlayed': {
+                    'Value': {
+                        'S': datetime.datetime.utcnow().isoformat()
+                    }
+                },
+                'lastScore': {
+                    'Value': {
+                        'N': str(last_score)
+                    }
+                }
+            }
+        )
+        return True
+    except ClientError as err:
+        # log the failure but don't crash
+        print("[BOTO3_ERROR]Failed to update table: " + str(err))
+        return False
+
+
+def update_score_games_and_pack(customer_id, score, games_played, last_pack, last_score):
+    """update the score, games, and last pack played attribute for the customer"""
+    print("=====update_last_played_time fired...")
+    client = create_client()
+
+    try:
+        client.update_item(
+            TableName='code_word',
+            Key={
+                'customerID': {
+                    'S': customer_id
+                }
+            },
+            AttributeUpdates={
+                'lifetimeScore': {
+                    'Value': {
+                        'N': str(score)
+                    }
+                },
+                'gamesPlayed': {
+                    'Value': {
+                        'N': str(games_played)
+                    }
+                },
+                'lastWordPackPlayed': {
+                    'Value': {
+                        'N': str(last_pack)
+                    }
+                },
+                'lastPlayed': {
+                    'Value': {
+                        'S': datetime.datetime.utcnow().isoformat()
+                    }
+                },
+                'lastScore': {
+                    'Value': {
+                        'N': str(last_score)
+                    }
+                }
+            }
         )
         return True
     except ClientError as err:

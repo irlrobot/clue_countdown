@@ -83,11 +83,11 @@ HELP_MESSAGE = """
 <prosody rate="90%">
 Clue Countdown is played over five rounds.
 Each round, I'll give you a series of clues and it's your job to figure out what word is related.
-After each clue, you'll get a chance to guess the word, or you can ask for the next clue if you're stumped. 
-The less clues you need, the more points you earn - each clue after the first will cost you 10 points! 
-</prosody>
+After each clue, you get a chance to guess the word, or you can ask for the next clue if you're stumped. 
+The less clues you need, the more points you earn! 
 For extra fun, use the Voice Profiles feature of Alexa to compete against everyone in your house. 
 New words and clues are being added all the time so check back often.
+</prosody>
 </amazon:emotion>
 """
 
@@ -105,7 +105,7 @@ The first clue is...
 </amazon:emotion>
 """
 
-FIRST_GAME = "<amazon:emotion name=\"excited\" intensity=\"medium\">" +\
+FIRST_GAME = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
     "Thanks for playing Clue Countdown!</amazon:emotion> " + \
     HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
@@ -122,7 +122,7 @@ The next clue is...
 """
 
 WRONG_ANSWER_CLUES_REMAIN = "<amazon:emotion name=\"excited\" intensity=\"medium\">" +\
-    "Good guess, but that's not the word I am thinking of!</amazon:emotion> " + \
+    "Good guess, but that's not the word!</amazon:emotion> " + \
     NEXT_CLUE
 
 WELCOME_REPROMPT = "Do you need to hear the rules for the game again?"
@@ -136,7 +136,7 @@ Thanks so much for playing Clue Countdown, see you next time!
 EXIT_WITH_REVIEW_REQUEST = """
 <amazon:emotion name="excited" intensity="medium">
 Thanks for playing Clue Countdown!
-If you had fun playing, please leave a 5 star review to support the creator."
+If you had fun playing, please leave a review to support the creator."
 </amazon:emotion>
 """
 
@@ -153,13 +153,6 @@ NO_MORE_CLUES = """
 <amazon:emotion name="excited" intensity="low">
 I've already given you all the clues!  The last clue was: {}". What word am I thinking of?"
 </amazon:emotion>
-"""
-
-NEXT_ROUND_WITH_CLUE = """
-<amazon:emotion name="excited" intensity="medium">
-Get ready.  Next round in 3... 2... 1...
-</amazon:emotion>
-{}
 """
 
 

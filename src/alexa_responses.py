@@ -45,7 +45,7 @@ def speech(tts=None, attributes=None, should_end_session=None,
         }
     }
 
-    logger.debug("=====Response:  %s", str(response))
+    logger.debug("=====Response back:  %s", str(response))
     return response
 
 
