@@ -162,6 +162,12 @@ Get ready.  Next round in 3... 2... 1...
 {}
 """
 
+STANDARD_REPROMPT = """
+<amazon:emotion name="excited" intensity="medium">
+Time's up!  What's your guess?"
+</amazon:emotion>
+"""
+
 
 def random_correct_answer_message(correct_answer):
     """ Return a random encouraging phrase for getting a right answer """
