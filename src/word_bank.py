@@ -3,7 +3,7 @@ Words and Clues!
 """
 CURRENT_PACK_ID = 9
 CURRENT_PACK_THEME = "Interviewing for a job"
-[
+CURRENT_PACK = [
     {
         "code_word": "résumé",
         "clues": ["a list of work experience",
