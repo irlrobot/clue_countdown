@@ -13,86 +13,48 @@ logger.setLevel(logging.DEBUG)
 
 
 def speech(tts=None, attributes=None, should_end_session=None,
-           answered_correctly=None, reprompt=None):
+           card_title=None, card_text=None,
+           answered_correctly=None,
+           prompt_sound=strings.PROMPT_SOUND,
+           reprompt=strings.STANDARD_REPROMPT,
+           music=strings.CLUE_READING_MUSIC):
     """ Build speech output """
     logger.debug("======speech fired...")
-    sound_effect = get_sound_effect_for_answer(answered_correctly)
-    prompt_sound = get_prompt_sound(should_end_session)
+    logger.debug("+++++%s", answered_correctly)
 
-    if reprompt is None:
-        reprompt_tts = strings.STANDARD_REPROMPT
+    if answered_correctly:
+        sound_effect = strings.CORRECT_SOUND
+    elif answered_correctly is None:
+        sound_effect = strings.BRIDGE_SOUND
     else:
-        reprompt_tts = reprompt
+        sound_effect = strings.WRONG_SOUND
 
     response = {
         "version": "1.0",
         "sessionAttributes": attributes,
         "response": {
             "shouldEndSession": should_end_session,
-            # "outputSpeech": {
-            #    "type": "SSML",
-            #    "ssml": "<speak>" + sound + tts + prompt + "</speak>"
-            # },
-            "reprompt": {
-                "outputSpeech": {
-                    "type": "SSML",
-                    "ssml": "<speak>{}</speak>".format(reprompt_tts)
-                }
-            },
-        }
-    }
-
-    response_with_apl = add_apl_to_response(
-        response, sound_effect, tts, prompt_sound)
-    logger.debug(json.dumps(response_with_apl))
-    return response_with_apl
-
-
-def speech_with_card(tts=None, attributes=None, should_end_session=None,
-                     card_title=None, card_text=None,
-                     answered_correctly=None, reprompt=None):
-    """ Build speech output with a card """
-    logger.debug("======speech_with_card fired...")
-    sound_effect = get_sound_effect_for_answer(answered_correctly)
-    prompt_sound = get_prompt_sound(should_end_session)
-
-    if reprompt is None:
-        reprompt_tts = "Time's up!  What's your guess?"
-    else:
-        reprompt_tts = reprompt
-    response = {
-        "version": "1.0",
-        "sessionAttributes": attributes,
-        "response": {
-            "shouldEndSession": should_end_session,
-            # "outputSpeech": {
-            #    "type": "SSML",
-            #    "ssml": "<speak>{}{}{}</speak>".format(sound_effect, tts, prompt_sound)
-            # },
-            "card": {
-                "type": "Standard",
-                "title": card_title,
-                "text": card_text,
-                "image": {
-                    "smallImageUrl":
-                        "https://s3.amazonaws.com/trainthatbrain/code_word_card_small.png",
-                    "largeImageUrl":
-                        "https://s3.amazonaws.com/trainthatbrain/code_word_card_large.png"
-                }
-            },
             "reprompt": {
                 "outputSpeech": {
                     "type": "PlainText",
-                    "text": str(reprompt_tts)
+                    "text": reprompt
                 }
             }
         }
     }
 
-    response_with_apl = add_apl_to_response(
-        response, sound_effect, tts, prompt_sound)
-    logger.debug(json.dumps(response_with_apl))
-    return response_with_apl
+    if card_title and card_text:
+        response['response'].update(
+            add_card_to_response(card_title, card_text))
+
+    response['response']['directives'] = add_apl_to_response(
+        tts=tts,
+        sound_effect=sound_effect,
+        music=music,
+        prompt_sound=prompt_sound)
+
+    logger.debug(json.dumps(response))
+    return response
 
 
 def play_end_message():
@@ -107,29 +69,14 @@ def play_end_message():
     else:
         tts = standard_message
 
-    return speech(tts, {}, True, None)
+    return speech(tts=tts,
+                  should_end_session=True,
+                  prompt_sound=strings.OUTRO_SOUND)
 
 
-def get_sound_effect_for_answer(answer_was_right):
-    """ Get the appropriate sound effect """
-    # Do not add any sound effects if player isn't guessing.
-    if answer_was_right is None:
-        return ""
-    if answer_was_right:
-        return "<audio src=\"https://s3.amazonaws.com/trainthatbrain/correct.mp3\" />"
-
-    return "<audio src=\"https://s3.amazonaws.com/trainthatbrain/wrong.mp3\" />"
-
-
-def get_prompt_sound(should_end_session):
-    """ Determine if the prompt sound should play """
-    if should_end_session:
-        return ''
-
-    return "<audio src=\"https://s3.amazonaws.com/trainthatbrain/prompt.mp3\" />"
-
-
-def add_apl_to_response(response, sound_effect, tts, prompt_sound):
+def add_apl_to_response(tts=None, sound_effect=None,
+                        music=None, prompt_sound=None,
+                        music_trim=3500, effect_trim=2000):
     """ Adds APL directives to a response """
     directives = [
         {
@@ -143,20 +90,30 @@ def add_apl_to_response(response, sound_effect, tts, prompt_sound):
                         "type": "Sequencer",
                         "items": [
                             {
+                                "type": "Audio",
+                                "source": sound_effect,
+                                "filter": [
+                                    {
+                                        "type": "Volume",
+                                        "amount": 0.5
+                                    },
+                                    {
+                                        "type": "Trim",
+                                        "end": effect_trim
+                                    }
+                                ]
+                            },
+                            {
                                 "type": "Mixer",
                                 "items": [
                                     {
-                                        "type": "Sequencer",
-                                        "items": [{
-                                            "type": "Speech",
-                                            "contentType": "SSML",
-                                            "content": "<speak>{}{}</speak>".format(sound_effect, tts)
-                                        }]
+                                        "type": "Speech",
+                                        "contentType": "SSML",
+                                        "content": "<speak>{}</speak>".format(tts)
                                     },
                                     {
                                         "type": "Audio",
-                                        "description": "https://developer.amazon.com/en-US/docs/alexa/custom-skills/ask-soundlibrary.html",
-                                        "source": "soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_countdown_loop_64s_minimal_01",
+                                        "source": music,
                                         "filter": [
                                             {
                                                 "type": "Volume",
@@ -164,16 +121,15 @@ def add_apl_to_response(response, sound_effect, tts, prompt_sound):
                                             },
                                             {
                                                 "type": "Trim",
-                                                "end": 3500
+                                                "end": music_trim
                                             }
                                         ]
                                     }
                                 ]
                             },
                             {
-                                "type": "Speech",
-                                "contentType": "SSML",
-                                "content": "<speak>{}</speak>".format(prompt_sound)
+                                "type": "Audio",
+                                "source": prompt_sound
                             }
                         ]
                     }
@@ -182,5 +138,23 @@ def add_apl_to_response(response, sound_effect, tts, prompt_sound):
         }
     ]
 
-    response["response"]["directives"] = directives
-    return response
+    return directives
+
+
+def add_card_to_response(card_title, card_text):
+    """ Adds APL directives to a response """
+    card = {
+        "card": {
+            "type": "Standard",
+            "title": card_title,
+            "text": card_text,
+            "image": {
+                "smallImageUrl":
+                    "https://s3.amazonaws.com/trainthatbrain/code_word_card_small.png",
+                "largeImageUrl":
+                    "https://s3.amazonaws.com/trainthatbrain/code_word_card_large.png"
+            }
+        }
+    }
+
+    return card

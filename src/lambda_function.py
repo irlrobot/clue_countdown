@@ -114,7 +114,7 @@ def next_clue_intent(this_game):
     game_status = this_game.game_status
 
     if game_status == "in_progress":
-        return next_clue_request(this_game, False)
+        return next_clue_request(this_game)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.
@@ -142,7 +142,7 @@ def not_sure_intent(intent, this_game):
             return handle_answer_request(intent, this_game)
 
         # Otherwise we go to the next clue.
-        return next_clue_request(this_game, False)
+        return next_clue_request(this_game)
 
     # If it's not started yet the player might have interrupted
     # Alexa during the rules being read so we repeat them.

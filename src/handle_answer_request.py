@@ -4,7 +4,7 @@ Handles the main flow of the game
 from __future__ import print_function
 import logging
 from fuzzywuzzy import fuzz
-from alexa_responses import speech_with_card, speech
+from alexa_responses import speech
 from manage_data import update_dynamodb
 import strings
 from word_bank import CURRENT_PACK_ID
@@ -37,7 +37,7 @@ def handle_answer_request(intent, this_game):
         answered_correctly = False
         # If clues remain give them the next clue instead of moving on.
         if this_game.current_clue_index != 4:
-            return next_clue_request(this_game, True)
+            return next_clue_request(this_game, answered_correctly=False)
 
     # If that was the last word and no clues remain, end the game.
     if this_game.current_question_index == this_game.game_length - 1:
@@ -67,12 +67,12 @@ def handle_answer_request(intent, this_game):
             "You said:  " + str(answer_heard)
         card_title = "That wasn't the word!"
 
-    return speech_with_card(tts=speech_output,
-                            attributes=this_game.attributes,
-                            should_end_session=False,
-                            card_title=card_title,
-                            card_text=card_text,
-                            answered_correctly=answered_correctly)
+    return speech(tts=speech_output,
+                  attributes=this_game.attributes,
+                  should_end_session=False,
+                  card_title=card_title,
+                  card_text=card_text,
+                  answered_correctly=answered_correctly)
 
 
 def end_game_return_score(this_game, answered_correctly,
@@ -101,33 +101,36 @@ def end_game_return_score(this_game, answered_correctly,
     card_title = "Clue Countdown Results"
     reprompt = "Would you like to play Clue Countdown again?"
 
-    return speech_with_card(tts=speech_output,
-                            attributes=this_game.attributes,
-                            should_end_session=False,
-                            card_title=card_title,
-                            card_text=card_text,
-                            answered_correctly=answered_correctly,
-                            reprompt=reprompt)
+    return speech(tts=speech_output,
+                  attributes=this_game.attributes,
+                  should_end_session=False,
+                  card_title=card_title,
+                  card_text=card_text,
+                  answered_correctly=answered_correctly,
+                  reprompt=reprompt,
+                  music=strings.GAME_OVER)
 
 
-def next_clue_request(this_game, last_guess_was_wrong):
+def next_clue_request(this_game, answered_correctly=None):
     """ Give player the next clue """
     logger.debug("=====next_clue_request fired...")
 
     # Max of 5 clues.
     if this_game.current_clue_index < 4:
         this_game.move_on_to_next_clue()
-        if last_guess_was_wrong:
-            speech_output = strings.WRONG_ANSWER_CLUES_REMAIN + this_game.current_clue
-        else:
+        if answered_correctly or answered_correctly is None:
             speech_output = strings.NEXT_CLUE + this_game.current_clue
+        else:
+            speech_output = strings.WRONG_ANSWER_CLUES_REMAIN + this_game.current_clue
+
     # Already on the last clue, repeat it.
     else:
         speech_output = strings.NO_MORE_CLUES.format(this_game.current_clue)
 
     return speech(tts=speech_output,
                   attributes=this_game.attributes,
-                  should_end_session=False)
+                  should_end_session=False,
+                  answered_correctly=answered_correctly)
 
 
 def repeat_clue_request(this_game):
