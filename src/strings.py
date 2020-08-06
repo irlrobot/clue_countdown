@@ -180,16 +180,23 @@ OUTRO_SOUND = "soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_outro_0
 GAME_OVER = "soundbank://soundlibrary/gameshow/gameshow_01"
 
 
-def random_correct_answer_message(correct_answer):
+def random_correct_answer_message(correct_answer, points):
     """ Return a random encouraging phrase for getting a right answer """
     phrases = [
         "Nailed it!",
         "Nice one!",
         "Great work!",
         "You got it!",
-        "Woohoo nice job!",
+        "Woohoo, nice job!",
         "You're amazing!",
         "Crushed it!"
+    ]
+
+    exclamation = [
+        "Booyah!",
+        "Bling, bling!",
+        "Yowza!",
+        "Hooray!"
     ]
 
     phrase = phrases[random.randint(0, len(phrases) - 1)]
@@ -197,7 +204,7 @@ def random_correct_answer_message(correct_answer):
     <amazon:emotion name="excited" intensity="high">
     {} 
     </amazon:emotion>
-    <amazon:emotion name="excited" intensity="low">
-    The word was {}.
+    <amazon:emotion name="excited" intensity="medium">
+    The word was {}. {} You got {} points!
     </amazon:emotion>
-    """.format(phrase, correct_answer)
+    """.format(phrase, correct_answer, exclamation, points)
