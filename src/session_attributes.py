@@ -33,7 +33,6 @@ class SessionAttributes():
 
         setattr(self, 'total_score', new_total_score)
         self.player_info['lifetimeScore']['N'] = new_lifetime_score
-        self.player_info['lastScore']['N'] = self.new_total_score
 
     def move_on_to_next_word(self):
         """ Update appropriate attributes when moving to the next word """
