@@ -1,5 +1,5 @@
 # Bugs
-[] Scoring is jacked, look into it
+[X] Scoring is jacked, look into it
 
 # Prioritized
 [X] Personalization working
