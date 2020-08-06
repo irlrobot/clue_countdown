@@ -163,10 +163,22 @@ Get ready.  Next round in 3... 2... 1...
 """
 
 STANDARD_REPROMPT = """
-<amazon:emotion name="excited" intensity="medium">
 Time's up!  What's your guess?"
-</amazon:emotion>
 """
+
+CLUE_READING_MUSIC = "soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_countdown_loop_64s_minimal_01"
+
+PROMPT_SOUND = "https://s3.amazonaws.com/trainthatbrain/prompt.mp3"
+
+CORRECT_SOUND = "https://s3.amazonaws.com/trainthatbrain/correct.mp3"
+
+WRONG_SOUND = "https://s3.amazonaws.com/trainthatbrain/wrong.mp3"
+
+BRIDGE_SOUND = "soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_bridge_02"
+
+OUTRO_SOUND = "soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_outro_01"
+
+GAME_OVER = "soundbank://soundlibrary/gameshow/gameshow_01"
 
 
 def random_correct_answer_message(correct_answer):
