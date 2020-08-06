@@ -80,12 +80,11 @@ Get ready, next game starting in... 3... 2... 1... "
 
 HELP_MESSAGE = """
 <amazon:emotion name="excited" intensity="low">
-<prosody rate="90%">
 Clue Countdown is played over five rounds.
 Each round, I'll give you a series of clues and it's your job to figure out what word is related.
 After each clue, you'll get a chance to guess the word, or you can ask for the next clue if you're stumped. 
 The less clues you need, the more points you earn - each clue after the first will cost you 10 points! 
-</prosody>
+Oh, and you'll need to think fast as you'll only have 8 seconds to make a guess!
 For extra fun, use the Voice Profiles feature of Alexa to compete against everyone in your house. 
 New words and clues are being added all the time so check back often.
 </amazon:emotion>
