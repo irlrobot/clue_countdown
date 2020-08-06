@@ -47,7 +47,8 @@ def handle_answer_request(intent, this_game):
             this_game.update_last_word_pack_played(CURRENT_PACK_ID)
 
         return end_game_return_score(this_game, answered_correctly,
-                                     answer_heard, correct_answer)
+                                     answer_heard, correct_answer,
+                                     current_question_value)
 
     # If that wasn't the last word in the game continue on to next word.
     this_game.move_on_to_next_word()
@@ -56,7 +57,7 @@ def handle_answer_request(intent, this_game):
 
     if answered_correctly:
         speech_output = strings.random_correct_answer_message(
-            correct_answer) + next_clue_message
+            correct_answer, current_question_value) + next_clue_message
         card_text = "The word was:  " + correct_answer + ". You got " + \
             str(current_question_value) + " points!"
         card_title = "You figured out the word!"
@@ -76,7 +77,8 @@ def handle_answer_request(intent, this_game):
 
 
 def end_game_return_score(this_game, answered_correctly,
-                          answer_heard, correct_answer):
+                          answer_heard, correct_answer,
+                          current_question_value):
     """ If the customer answered the last question we end the game """
     logger.debug("=====end_game_return_score fired...")
     this_game.increment_total_games_played()
@@ -89,7 +91,7 @@ def end_game_return_score(this_game, answered_correctly,
 
     if answered_correctly:
         speech_output = strings.random_correct_answer_message(
-            correct_answer) + wrap_up_speech
+            correct_answer, current_question_value) + wrap_up_speech
         card_text = "Your score is " + str(this_game.total_score) + " points!\n" + \
             "The last word was: " + correct_answer
     else:

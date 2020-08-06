@@ -144,7 +144,7 @@ WRONG_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
 
 END_GAME_WRAP_UP = """
 <amazon:emotion name="excited" intensity="medium">
-Wow, nice job! You got {} points. Would you like to play Clue Countdown again?"
+Wow, nice job! Your final score is {} points. Would you like to play Clue Countdown again?"
 </amazon:emotion>
 """
 
@@ -192,19 +192,22 @@ def random_correct_answer_message(correct_answer, points):
         "Crushed it!"
     ]
 
-    exclamation = [
+    exclamations = [
         "Booyah!",
         "Bling, bling!",
         "Yowza!",
-        "Hooray!"
+        "Hooray!",
+        "Huzzah!"
     ]
 
     phrase = phrases[random.randint(0, len(phrases) - 1)]
+    exclamation = exclamations[random.randint(0, len(exclamations) - 1)]
+
     return """
     <amazon:emotion name="excited" intensity="high">
     {} 
-    </amazon:emotion>
-    <amazon:emotion name="excited" intensity="medium">
-    The word was {}. {} You got {} points!
+    The word was {}. 
+    {} 
+    You got {} points!
     </amazon:emotion>
     """.format(phrase, correct_answer, exclamation, points)
