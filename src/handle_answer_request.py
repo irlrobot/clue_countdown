@@ -51,18 +51,18 @@ def handle_answer_request(intent, this_game):
 
     # If that wasn't the last word in the game continue on to next word.
     this_game.move_on_to_next_word()
-    speech_output = strings.NEXT_ROUND_WITH_CLUE.format(
+    next_clue_message = strings.NEXT_ROUND_WITH_CLUE.format(
         this_game.get_first_clue())
 
     if answered_correctly:
         speech_output = strings.random_correct_answer_message(
-            correct_answer) + speech_output
+            correct_answer) + next_clue_message
         card_text = "The word was:  " + correct_answer + ". You got " + \
             str(current_question_value) + " points!"
         card_title = "You figured out the word!"
     else:
         speech_output = strings.WRONG_ANSWER.format(
-            correct_answer) + speech_output
+            correct_answer) + next_clue_message
         card_text = "The word was:  " + correct_answer + "\n" + \
             "You said:  " + str(answer_heard)
         card_title = "That wasn't the word!"
