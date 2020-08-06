@@ -59,11 +59,6 @@ CURRENT_PACK = [
 
 WORDS = [
     {
-        "code_word": "Trump",
-        "clues": ["president", "likes to tweet", "owns hotels", "rich", "build a wall",
-                  "Donald"]
-    },
-    {
         "code_word": "simpson",
         "clues": ["OJ", "Jessica", "Ashley", "Homer", "Bart"]
     },
