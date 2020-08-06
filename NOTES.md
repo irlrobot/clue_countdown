@@ -12,10 +12,8 @@
 [X] New logo
 [X] Voice diagram to walk through
   [] Stretch goal: Make cards like this https://developer.amazon.com/en-US/docs/alexa/alexa-design/script.html#write-the-shortest-route-to-completion
-[] APLA and refactor alexa_responses.py
-  [] Remove the sound prompt? It may be more annoying than it's worth.
+[X] APLA and refactor alexa_responses.py
   [] Improve visual support (i.e. more APL, not just cards)
-  [] New sounds including background music and try to have mixed audio working
 [X] Finish new word pack and add slot values and synonyms!
 
 # Not prioritized
