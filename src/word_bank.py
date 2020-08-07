@@ -468,7 +468,7 @@ WORDS = [
     },
     {
         "code_word": "goosebumps",
-        "clues": ["90s childrens book series", "R.L. Stein", "goose pimples",
+        "clues": ["90s young adult book series", "R.L. Stein", "goose pimples",
                   "children's horror fiction", "you get these when you’re cold"],
         "pack_clue": "Throwback to the 1990's",
         "pack_id": 6
@@ -483,7 +483,7 @@ WORDS = [
     {
         "code_word": "posh",
         "clues": ["Victoria Beckham", "meaning high-class", "spice girls member",
-                  "another word for luxurious", " acronymn for: port out, starboard home"],
+                  "another word for luxurious", " acronym for: port out, starboard home"],
         "pack_clue": "Throwback to the 1990's",
         "pack_id": 6
     },
@@ -562,7 +562,7 @@ WORDS = [
     },
     {
         "code_word": "curling",
-        "clues": ["sliding stones", "four concentric circles", "sometimes calleed chess on ice",
+        "clues": ["sliding stones", "four concentric circles", "it's sometimes called chess on ice",
                   "polished granite stones", "invented by the Scottish"],
         "pack_clue": "The Winter Games",
         "pack_id": 8
