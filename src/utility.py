@@ -4,7 +4,11 @@ Utility and helper functions
 import datetime
 import logging
 import random
-from manage_data import get_player_info, get_others_in_household
+from manage_data import (
+    get_player_info,
+    get_others_in_household,
+    add_person_to_household
+)
 import strings
 
 
@@ -98,8 +102,9 @@ def determine_welcome_message(household_id, person_id, player):
         # If no voice profile detected give the non-personalized experience.
         if person_id == "default":
             tts = strings.FIRST_GAME
-        # Otherwise we personalize the greeting.
+        # Otherwise we personalize the greeting and update DynamoDB.
         else:
+            add_person_to_household(household_id, person_id)
             tts = strings.FIRST_GAME_PERSONALIZED.format(person_id)
 
     return tts
