@@ -144,7 +144,7 @@ WRONG_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
 
 END_GAME_WRAP_UP = """
 <amazon:emotion name="excited" intensity="medium">
-Wow, nice job! Your final score is {} points. Would you like to play Clue Countdown again?"
+Wow, nice job! Your final score is {} points. Would you like to play Clue Countdown again?
 </amazon:emotion>
 """
 
