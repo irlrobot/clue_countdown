@@ -79,7 +79,7 @@ Get ready, next game starting in... 3... 2... 1... "
 """
 
 HELP_MESSAGE = """
-<amazon:emotion name="excited" intensity="low">
+<amazon:emotion name="excited" intensity="medium">
 Clue Countdown is played over five rounds.
 Each round, I'll give you a series of clues and it's your job to figure out what word is related.
 After each clue, you'll get a chance to guess the word, or you can ask for the next clue if you're stumped. 
