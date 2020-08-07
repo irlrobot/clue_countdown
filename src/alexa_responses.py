@@ -150,9 +150,9 @@ def add_card_to_response(card_title, card_text):
             "text": card_text,
             "image": {
                 "smallImageUrl":
-                    "https://s3.amazonaws.com/trainthatbrain/code_word_card_small.png",
+                    "https://trainthatbrain.s3.amazonaws.com/cc_card_small.jpeg",
                 "largeImageUrl":
-                    "https://s3.amazonaws.com/trainthatbrain/code_word_card_large.png"
+                    "https://trainthatbrain.s3.amazonaws.com/cc_logo_large.jpeg"
             }
         }
     }
