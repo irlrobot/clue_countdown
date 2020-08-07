@@ -128,21 +128,8 @@ def get_others_in_household(household_id, person_id):
 
     # Otherwise create a new household record and return an empty array.
     logger.debug("=====New household...")
-    create_household(household_id, person_id)
+    add_person_to_household(household_id, person_id)
     return []
-
-
-def create_household(household_id, person_id):
-    """ Create a new household record in DDB """
-    logger.debug("=====create_household fired...")
-    client = create_client()
-
-    response = client.update_item(TableName="code_word_households",
-                                  Key={'householdID': {'S': household_id}},
-                                  UpdateExpression="ADD people :element",
-                                  ExpressionAttributeValues={":element": {"SS": [person_id]}})
-
-    return response
 
 
 def add_person_to_household(household_id, person_id):
