@@ -126,7 +126,6 @@ def next_clue_intent(this_game):
 
     # Player probably got here because they said something other than
     # yes or no after asking if they wanted to play the game again.
-    # TODO 2 perhaps we should start the game again instead to entice them?
     logger.debug("=====No attributes ending game...")
     return play_end_message()
 
@@ -154,7 +153,6 @@ def not_sure_intent(intent, this_game):
 
     # Player probably got here because they said something other than
     # yes or no after asking if they wanted to play the game again.
-    # TODO 2 perhaps we should start the game again instead to entice them?
     logger.debug("=====No attributes ending game...")
     return play_end_message()
 
@@ -177,7 +175,6 @@ def repeat_intent(this_game):
 
     # Player probably got here because they said something other than
     # yes or no after asking if they wanted to play the game again.
-    # TODO 2 perhaps we should start the game again instead to entice them?
     logger.debug("=====no attributes ending game")
     return play_end_message()
 
