@@ -140,7 +140,7 @@ If you had fun playing, please leave a review to support the creator."
 """
 
 WRONG_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
-    "Nope! The word was {}.</amazon:emotion>"
+    "The correct answer was {}.</amazon:emotion>"
 
 END_GAME_WRAP_UP = """
 <amazon:emotion name="excited" intensity="medium">
