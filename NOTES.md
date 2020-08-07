@@ -1,5 +1,6 @@
 # Bugs
 [X] Scoring is jacked, look into it
+[X] Cards rendering old image
 
 # Prioritized
 [X] Personalization working
@@ -13,7 +14,8 @@
 [X] Voice diagram to walk through
   [] Stretch goal: Make cards like this https://developer.amazon.com/en-US/docs/alexa/alexa-design/script.html#write-the-shortest-route-to-completion
 [X] APLA and refactor alexa_responses.py
-  [] Improve visual support (i.e. more APL, not just cards)
+  [] Improve visual support with APL
+  [] Refine the audio experience a bit more. Music needs to be longer in some places (Help message), buzzer is kinda loud/obnoxious, and both getting a right answer and finishing a game needs to feel a bit more fun.
 [X] Finish new word pack and add slot values and synonyms!
 
 # Not prioritized
