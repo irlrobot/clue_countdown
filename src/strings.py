@@ -6,7 +6,7 @@ import random
 
 WELCOME_BACK_1 = """
 <amazon:emotion name="excited" intensity="medium">
-Hey there, welcome back to Clue Countdown!
+Hey there, welcome back to Code Word!
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 You've earned a grand total of {} points playing. Nice! Do you need a refresher on the rules of the game?
@@ -15,7 +15,7 @@ You've earned a grand total of {} points playing. Nice! Do you need a refresher 
 
 WELCOME_BACK_2 = """
 <amazon:emotion name="excited" intensity="medium">
-Look who's back for more Clue Countdown! 
+Look who's back for more Code Word! 
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 Last time you played you earned {} points. Let's see what you can do this game! Do you need to hear the rules?
@@ -24,7 +24,7 @@ Last time you played you earned {} points. Let's see what you can do this game! 
 
 WELCOME_BACK_PERSONALIZED_1 = """
 <amazon:emotion name="excited" intensity="medium">
-Hey <alexa:name type="first" personId="{}"/>, welcome back to Clue Countdown! 
+Hey <alexa:name type="first" personId="{}"/>, welcome back to Code Word! 
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 You've earned a grand total of {} points playing. Nice! Do you need a refresher on the rules of the game?
@@ -33,7 +33,7 @@ You've earned a grand total of {} points playing. Nice! Do you need a refresher 
 
 WELCOME_BACK_PERSONALIZED_2 = """
 <amazon:emotion name="excited" intensity="medium">
-Look who's back for more Clue Countdown it's <alexa:name type="first" personId="{}"/>! 
+Look who's back for more Code Word it's <alexa:name type="first" personId="{}"/>! 
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 Last time you played you earned {} points. Let's see what you can do this game! Do you need to hear the rules?
@@ -42,7 +42,7 @@ Last time you played you earned {} points. Let's see what you can do this game! 
 
 WELCOME_BACK_OPPONENT_1 = """
 <amazon:emotion name="excited" intensity="medium">
-Welcome back to Clue Countdown <alexa:name type="first" personId="{}"/>! 
+Welcome back to Code Word <alexa:name type="first" personId="{}"/>! 
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 Hope you brought your A game today to beat <alexa:name type="first" personId="{}"/>'s recent score of {}.
@@ -52,7 +52,7 @@ Do you need me to remind you of the rules before we start the game?
 
 WELCOME_BACK_OPPONENT_2 = """
 <amazon:emotion name="excited" intensity="medium">
-<alexa:name type="first" personId="{}"/> is in the house and ready for more Clue Countdown! 
+<alexa:name type="first" personId="{}"/> is in the house and ready for more Code Word! 
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 Make sure you brag about your score to <alexa:name type="first" personId="{}"/> today.
@@ -71,7 +71,7 @@ The theme or category for this game will be...
 
 REPLAY_GAME_START = """
 <amazon:emotion name="excited" intensity="high">
-Woohoo more Clue Countdown coming right up!
+Woohoo more Code Word coming right up!
 </amazon:emotion>
 <amazon:emotion name="excited" intensity="low">
 Get ready, next game starting in... 3... 2... 1... "
@@ -80,7 +80,7 @@ Get ready, next game starting in... 3... 2... 1... "
 
 HELP_MESSAGE = """
 <amazon:emotion name="excited" intensity="medium">
-Clue Countdown is played over five rounds.
+Code Word is played over five rounds.
 Each round, I'll give you a series of clues and it's your job to figure out what word is related.
 After each clue, you'll get a chance to guess the word, or you can ask for the next clue if you're stumped. 
 The less clues you need, the more points you earn - each clue after the first will cost you 10 points! 
@@ -105,12 +105,12 @@ The first clue is...
 """
 
 FIRST_GAME = "<amazon:emotion name=\"excited\" intensity=\"medium\">" +\
-    "Thanks for playing Clue Countdown!</amazon:emotion> " + \
+    "Thanks for playing Code Word!</amazon:emotion> " + \
     HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
 
 FIRST_GAME_PERSONALIZED = "<amazon:emotion name=\"excited\" intensity=\"high\">" +\
-    "Thanks for playing Clue Countdown <alexa:name type=\"first\" personId=\"{}\"/>!" +\
+    "Thanks for playing Code Word <alexa:name type=\"first\" personId=\"{}\"/>!" +\
     "</amazon:emotion> " + HELP_MESSAGE + \
     " Do you need to hear the rules again before we get started?"
 
@@ -128,13 +128,13 @@ WELCOME_REPROMPT = "Do you need to hear the rules for the game again?"
 
 STANDARD_EXIT_MESSAGE = """
 <amazon:emotion name="excited" intensity="medium">
-Thanks so much for playing Clue Countdown, see you next time!
+Thanks so much for playing Code Word, see you next time!
 </amazon:emotion>
 """
 
 EXIT_WITH_REVIEW_REQUEST = """
 <amazon:emotion name="excited" intensity="medium">
-Thanks for playing Clue Countdown!
+Thanks for playing Code Word!
 If you had fun playing, please leave a review to support the creator."
 </amazon:emotion>
 """
@@ -144,7 +144,7 @@ WRONG_ANSWER = "<amazon:emotion name=\"excited\" intensity=\"low\">" +\
 
 END_GAME_WRAP_UP = """
 <amazon:emotion name="excited" intensity="medium">
-Wow, nice job! Your final score is {} points. Would you like to play Clue Countdown again?
+Wow, nice job! Your final score is {} points. Would you like to play Code Word again?
 </amazon:emotion>
 """
 

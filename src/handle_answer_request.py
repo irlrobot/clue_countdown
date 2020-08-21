@@ -100,8 +100,8 @@ def end_game_return_score(this_game, answered_correctly,
         card_text = "Your score is " + str(this_game.total_score) + " points!\n" + \
             "\nThe last word was: " + correct_answer + "\nYou said: " + answer_heard
 
-    card_title = "Clue Countdown Results"
-    reprompt = "Would you like to play Clue Countdown again?"
+    card_title = "Code Word Results"
+    reprompt = "Would you like to play Code Word again?"
 
     return speech(tts=speech_output,
                   attributes=this_game.attributes,
